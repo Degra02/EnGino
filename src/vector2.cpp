@@ -33,5 +33,10 @@ phy_eng::vector2 phy_eng::vector2::operator-(phy_eng::vector2 v2) {
 }
 
 float phy_eng::vector2::norm(phy_eng::vector2 v) {
-    return std::sqrt(std::pow(v.x, 2) - std::pow(v.y, 2));
+    return std::sqrt(std::pow(v.x, 2) + std::pow(v.y, 2));
+}
+
+float phy_eng::vector2::norm(phy_eng::vector2 v1, phy_eng::vector2 v2) {
+    return std::sqrt(std::pow((v1.x - v2.x), 2) +
+                     std::pow((v1.y - v2.y), 2));
 }

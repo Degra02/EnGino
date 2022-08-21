@@ -14,7 +14,7 @@ namespace phy_eng {
     }
 
     phy_eng::World::~World() {
-        assert(this->n == 0);
+        //assert(this->n == 0);
     }
 
     void World::addObject(Object *obj) {

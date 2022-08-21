@@ -3,7 +3,6 @@
 
 #include "vector2.h"
 #include "Object.h"
-#include "SphereCollider.h"
 
 namespace phy_eng {
 
@@ -12,8 +11,6 @@ namespace phy_eng {
         float r;
         vector2 centerPos;
     public:
-        SphereCollider collider; // Used to check collisions
-
         Sphere();
         Sphere(float, vector2);
         void setRadius(float);

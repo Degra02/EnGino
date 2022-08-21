@@ -18,6 +18,7 @@ namespace phy_eng{
         vector2 operator /(float m);
 
         static float norm(vector2 v);
+        static float norm(vector2 v1, vector2 v2);
     };
 }
 
