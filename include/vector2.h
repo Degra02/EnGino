@@ -12,9 +12,12 @@ namespace phy_eng{
         vector2(float x, float y);
 
         vector2 operator +(vector2 v2); // algebraic sum
+        vector2 operator -(vector2 v2);
         vector2 operator +=(vector2 v2) const;
         vector2 operator *(float m);
         vector2 operator /(float m);
+
+        static float norm(vector2 v);
     };
 }
 
