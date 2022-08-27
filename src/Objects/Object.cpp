@@ -29,6 +29,10 @@ namespace phy_eng {
     void phy_eng::Object::applyForce(phy_eng::vector2 force) {
         this->Force = force;
     }
+
+    void Object::setColor(sf::Color color) {
+        this->color = color;
+    }
 }
 
 

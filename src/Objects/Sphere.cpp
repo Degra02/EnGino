@@ -1,7 +1,7 @@
 #include "../../include/Sphere.h"
 
 namespace phy_eng {
-    Sphere::Sphere() {
+    Sphere::Sphere() : Object() {
         this->r = 0;
         this->centerPos = {0, 0};
     }
