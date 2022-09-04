@@ -37,6 +37,6 @@ namespace phy_eng {
     }
 
     void Circle::applyChange() {
-        this->circleShape.setPosition({this->Position.getX(), this->Position.getY()});
+        this->circleShape.setPosition({this->Position.getX(), -this->Position.getY()});
     }
 } // phy_eng

@@ -16,12 +16,12 @@ phy_eng::vector2 phy_eng::vector2::operator+(phy_eng::vector2 v2) {
     return {x + v2.x, y + v2.y};
 }
 
-phy_eng::vector2 phy_eng::vector2::operator+=(phy_eng::vector2 v2) const {
+phy_eng::vector2 phy_eng::vector2::operator+=(phy_eng::vector2 v2) {
     return {x + v2.x, y + v2.y};
 }
 
 phy_eng::vector2 phy_eng::vector2::operator*(float m) {
-    return {0, 0};
+    return {this->x * m, this->y * m};
 }
 
 phy_eng::vector2 phy_eng::vector2::operator/(float m) {
@@ -32,7 +32,7 @@ phy_eng::vector2 phy_eng::vector2::operator-(phy_eng::vector2 v2) {
     return {this->x - v2.x, this->y - v2.y};
 }
 
-float phy_eng::vector2::norm(phy_eng::vector2 v) {
+float phy_eng::vector2::norm(phy_eng::vector2 v) { // Static function
     return std::sqrt(std::pow(v.x, 2) + std::pow(v.y, 2));
 }
 

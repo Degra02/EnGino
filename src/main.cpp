@@ -13,7 +13,7 @@ int main() {
 
     sf::RenderWindow window(sf::VideoMode(1000, 1000), "Physics Engine");
 
-    phy_eng::Circle circle = phy_eng::Circle(100, {100, 100});
+    phy_eng::Circle circle = phy_eng::Circle(50, {50, 100});
     circle.setMass(10);
     world.addObject(circle);
 

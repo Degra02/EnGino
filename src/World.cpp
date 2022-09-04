@@ -34,9 +34,9 @@ namespace phy_eng {
 
     void World::step() {
         for (Object* obj: worldObjects){
-            obj->Force += gravity * obj->Mass;
-            obj->Velocity += (obj->Force / obj->Mass) * dt;
-            obj->Position += obj->Velocity * dt;
+            obj->Force = obj->Force + (this->gravity * obj->Mass);
+            obj->Velocity = obj->Velocity + (obj->Force / obj->Mass) * dt;
+            obj->Position = obj->Position + (obj->Velocity * dt);
 
             obj->Force = {0.f, 0.f}; // Reinitializing the force applied to the Object
 
