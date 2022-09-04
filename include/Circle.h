@@ -13,9 +13,10 @@ namespace phy_eng {
         sf::CircleShape circleShape = sf::CircleShape(r);
     public:
         Circle();
-        Circle(float, vector2);
+        Circle(float, vector2, float);
+        Circle(float, vector2, float, Mobility);
 
-        sf::CircleShape& getCircleShape();
+        sf::Drawable& getDrawable() override;
 
         void setRadius(float);
         void setCenterPos(vector2);

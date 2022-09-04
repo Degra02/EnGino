@@ -6,6 +6,8 @@
 
 namespace phy_eng {
 
+    enum Mobility {FIXED, FREE};
+
     class Object {
     public:
         vector2 Position;
@@ -18,20 +20,28 @@ namespace phy_eng {
 
         float angular_velocity = 0;
 
+        Mobility mobility;
 
         Object();
-        Object(vector2 pos, vector2 v, vector2 a, vector2 f, float m);
+        Object(vector2 pos, vector2 v, vector2 a, vector2 f, float m, Mobility mobility);
         Object(vector2 pos, vector2 v, vector2 a, vector2 f, float m, float st_frict, float dn_frict);
         ~Object();
 
-        void setMass(float kg);
-        void setVelocity(vector2);
-        void setPosition(vector2);
-
         void applyForce(vector2 force);
+
+        // Gets overridden by each subclass
+        virtual sf::Drawable& getDrawable();
 
         // Applies change to graphics
         virtual void applyChange();
+
+        //Setters
+        const vector2 &getPosition() const;
+        void setMass(float kg);
+        void setVelocity(vector2);
+        void setPosition(vector2);
+        void setMobility(Mobility);
+        void setForce(vector2);
     };
 }
 

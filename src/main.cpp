@@ -6,16 +6,21 @@
 //Graphics
 #include <SFML/Graphics.hpp>
 
+#define WIDTH 1000
+#define HEIGHT 1000
+
 int main() {
     phy_eng::World world = phy_eng::World(0.01);
+    world.setGravity({0, -0.1});
 
-    phy_eng::Circle s(5, {0, 0});
+    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Physics Engine");
+    world.setConstraints(window.getSize().x, window.getSize().y);
 
-    sf::RenderWindow window(sf::VideoMode(1000, 1000), "Physics Engine");
+    phy_eng::Circle circle = phy_eng::Circle(10, {90, 100}, 10);
+    phy_eng::Circle circle2 = phy_eng::Circle(50, {200, 200}, 10);
+    circle2.setMobility(phy_eng::Mobility::FIXED);
 
-    phy_eng::Circle circle = phy_eng::Circle(50, {50, 100});
-    circle.setMass(10);
-    world.addObject(circle);
+    world.addObjects({&circle, &circle2});
 
     while (window.isOpen()){
         sf::Event event{};
@@ -25,7 +30,9 @@ int main() {
                     window.close();
 
                 case sf::Event::KeyPressed: {
-
+                    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+                        world.setPaused();
+                    }
                 }
             }
         }
@@ -33,7 +40,10 @@ int main() {
 
         world.step();
 
-        window.draw(circle.getCircleShape());
+        for (auto &obj: world.worldObjects){
+            window.draw(obj->getDrawable());
+        }
+
         window.display();
     }
 

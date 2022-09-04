@@ -1,6 +1,5 @@
 #include "../include/World.h"
 #include <iostream>
-#include <cassert>
 #include <algorithm>
 
 namespace phy_eng {
@@ -14,12 +13,17 @@ namespace phy_eng {
     }
 
     phy_eng::World::~World() {
-        //assert(this->n == 0);
     }
 
     void World::addObject(Object &obj) {
         this->worldObjects.push_back(&obj);
         n++;
+    }
+
+    void World::addObjects(std::vector<Object*> objects ) {
+        for (auto &obj : objects){
+            addObject(*obj);
+        }
     }
 
     void World::removeObject(Object *obj) {
@@ -33,14 +37,17 @@ namespace phy_eng {
     }
 
     void World::step() {
-        for (Object* obj: worldObjects){
-            obj->Force += (this->gravity * obj->Mass);
-            obj->Velocity += (obj->Force / obj->Mass) * dt;
-            obj->Position += (obj->Velocity * dt);
+        if(!isPaused) {
+            for (Object* obj: worldObjects){
+                if (obj->mobility == FREE){
+                    obj->Force += (this->gravity * obj->Mass);
+                    obj->Velocity += (obj->Force / obj->Mass) * dt;
+                    obj->Position += (obj->Velocity * dt);
 
-            obj->Force = {0.f, 0.f}; // Reinitializing the force applied to the Object
-
-            obj->applyChange();
+                    obj->Force = {0.f, 0.f}; // Reinitializing the force applied to the Object
+                    obj->applyChange();
+                }
+            }
         }
     }
 
@@ -50,6 +57,19 @@ namespace phy_eng {
 
     void World::setDt(float dt) {
         this->dt = dt;
+    }
+
+    std::vector<Object*> World::getWorldObjects() {
+        return this->worldObjects;
+    }
+
+    void World::setPaused() {
+        this->isPaused = !isPaused;
+    }
+
+    void World::setConstraints(int x, int y) {
+        this->constraints[0] = x;
+        this->constraints[1] = y;
     }
 } // phy_eng
 

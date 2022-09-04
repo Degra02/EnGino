@@ -8,9 +8,21 @@ namespace phy_eng {
         this->circleShape.setPosition(this->Position.getX(), this->Position.getY());
     }
 
-    Circle::Circle(float r, vector2 centerPos) {
+    Circle::Circle(float r, vector2 centerPos, float mass) {
         this->r = r;
-        this->Position = centerPos;
+        setPosition(centerPos);
+        setMass(mass);
+        this->circleShape = sf::CircleShape(r);
+        this->circleShape.setPosition(this->Position.getX(), this->Position.getY());
+        this->circleShape.setFillColor(sf::Color::White);
+        this->circleShape.setPointCount(20);
+    }
+
+    Circle::Circle(float r, vector2 centerPos, float mass, Mobility mobility) {
+        this->r = r;
+        setPosition(centerPos);
+        setMass(mass);
+        setMobility(mobility);
         this->circleShape = sf::CircleShape(r);
         this->circleShape.setPosition(this->Position.getX(), this->Position.getY());
         this->circleShape.setFillColor(sf::Color::White);
@@ -32,7 +44,7 @@ namespace phy_eng {
         return this->Position;
     }
 
-    sf::CircleShape &Circle::getCircleShape() {
+    sf::Drawable &Circle::getDrawable() {
         return circleShape;
     }
 
