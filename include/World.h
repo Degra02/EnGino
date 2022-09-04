@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "Object.h"
 
-namespace phy_eng {
+namespace pheng {
     class World {
     private:
         vector2 gravity = vector2(0.0, -9.81f);

@@ -1,6 +1,6 @@
 #include "../../include/Circle.h"
 
-namespace phy_eng {
+namespace pheng {
     Circle::Circle() : Object() {
         this->r = 0;
         this->Position = {0, 0};
@@ -54,4 +54,4 @@ namespace phy_eng {
     void Circle::applyChange() {
         this->circleShape.setPosition({this->Position.getX(), -this->Position.getY()});
     }
-} // phy_eng
+} // pheng

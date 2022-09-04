@@ -1,13 +1,13 @@
 #include "../../include/Collisions.h"
 #include <typeinfo>
 
-namespace phy_eng {
+namespace pheng {
 
     bool Collisions::objToObj(Object *o1, Object *o2) {
         if(typeid(o1) == typeid(Circle)){
             if(typeid(o2) == typeid(Circle))
                 return circleToCircle(dynamic_cast<Circle*>(o1), dynamic_cast<Circle*>(o2));
-            else if (typeid(o2) == typeid(phy_eng::Rectangle)){
+            else if (typeid(o2) == typeid(pheng::Rectangle)){
 
             }
         } else if (typeid(o1) == typeid(Rectangle)){
@@ -23,4 +23,4 @@ namespace phy_eng {
         return false;
     }
 
-} // phy_eng
+} // pheng

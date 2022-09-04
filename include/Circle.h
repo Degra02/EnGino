@@ -4,7 +4,7 @@
 #include "vector2.h"
 #include "Object.h"
 
-namespace phy_eng {
+namespace pheng {
 
     class Circle : public Object{
     private:
@@ -27,6 +27,6 @@ namespace phy_eng {
         virtual void applyChange();
     };
 
-} // phy_eng
+} // pheng
 
 #endif //PHYSICSENGINE_CIRCLE_H

@@ -10,14 +10,14 @@
 #define HEIGHT 1000
 
 int main() {
-    phy_eng::World world = phy_eng::World(0.01);
+    pheng::World world = pheng::World(0.01);
 
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Physics Engine");
     world.setConstraints(window.getSize().x, window.getSize().y);
 
-    phy_eng::Circle circle = phy_eng::Circle(10, {90, 100}, 10);
-    phy_eng::Circle circle2 = phy_eng::Circle(50, {200, 200}, 10);
-    circle2.setMobility(phy_eng::Mobility::FIXED);
+    pheng::Circle circle = pheng::Circle(50, {100, 100}, 10);
+    pheng::Circle circle2 = pheng::Circle(50, {200, 200}, 10);
+    circle2.setMobility(pheng::Mobility::FIXED);
 
     world.addObjects({&circle, &circle2});
 

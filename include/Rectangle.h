@@ -3,7 +3,7 @@
 
 #include "Object.h"
 
-namespace phy_eng {
+namespace pheng {
 
     class Rectangle : public Object{
     private:
@@ -20,6 +20,6 @@ namespace phy_eng {
         float getHeight() const;
     };
 
-} // phy_eng
+} // pheng
 
 #endif //PHYSICSENGINE_RECTANGLE_H

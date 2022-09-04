@@ -4,7 +4,7 @@
 #include "Circle.h"
 #include "Rectangle.h"
 
-namespace phy_eng {
+namespace pheng {
 
     class Collisions {
     public:

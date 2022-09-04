@@ -1,17 +1,17 @@
 #include "../../include/Object.h"
 
-namespace phy_eng {
-    phy_eng::Object::Object() {
+namespace pheng {
+    pheng::Object::Object() {
         this->Position = {0.f, 0.f};
         this->Velocity = {0.f, 0.f};
         this->Mass = 0.f;
         this->mobility = FREE;
     }
 
-    phy_eng::Object::~Object() = default;
+    pheng::Object::~Object() = default;
 
-    phy_eng::Object::Object(phy_eng::vector2 pos, phy_eng::vector2 v, phy_eng::vector2 a, phy_eng::vector2 f, float m,
-                            Mobility mobility = FREE) {
+    pheng::Object::Object(pheng::vector2 pos, pheng::vector2 v, pheng::vector2 a, pheng::vector2 f, float m,
+                          Mobility mobility = FREE) {
         this->Position = pos;
         this->Velocity = v;
         this->Force = f;
@@ -19,8 +19,8 @@ namespace phy_eng {
         this->mobility = mobility;
     }
 
-    phy_eng::Object::Object(phy_eng::vector2 pos, phy_eng::vector2 v, phy_eng::vector2 a, phy_eng::vector2 f,
-                            float m, float st_frict, float dn_frict) {
+    pheng::Object::Object(pheng::vector2 pos, pheng::vector2 v, pheng::vector2 a, pheng::vector2 f,
+                          float m, float st_frict, float dn_frict) {
         this->Position = pos;
         this->Velocity = v;
         this->Force = f;
@@ -29,7 +29,7 @@ namespace phy_eng {
         this->coef_dn_frict = dn_frict;
     }
 
-    void phy_eng::Object::applyForce(phy_eng::vector2 force) {
+    void pheng::Object::applyForce(pheng::vector2 force) {
         this->Force = force;
     }
 

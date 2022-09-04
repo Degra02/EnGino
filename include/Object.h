@@ -4,7 +4,7 @@
 #include "vector2.h"
 #include <SFML/Graphics.hpp>
 
-namespace phy_eng {
+namespace pheng {
 
     enum Mobility {FIXED, FREE};
 

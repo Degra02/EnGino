@@ -3,9 +3,9 @@
 #include <iostream>
 #include <algorithm>
 
-namespace phy_eng {
+namespace pheng {
 
-    phy_eng::World::World() {
+    pheng::World::World() {
         dt = 0;
     }
 
@@ -13,7 +13,7 @@ namespace phy_eng {
         this->dt = dt;
     }
 
-    phy_eng::World::~World() {
+    pheng::World::~World() {
     }
 
     void World::addObject(Object &obj) {
@@ -86,6 +86,6 @@ namespace phy_eng {
         this->constraints[0] = x;
         this->constraints[1] = y;
     }
-} // phy_eng
+} // pheng
 
 

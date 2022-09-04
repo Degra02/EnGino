@@ -1,7 +1,7 @@
 #ifndef PHYSICSENGINE_VECTOR2_H
 #define PHYSICSENGINE_VECTOR2_H
 
-namespace phy_eng{
+namespace pheng{
 
     class vector2 {
         float x;
@@ -24,7 +24,7 @@ namespace phy_eng{
 
         static float dotProduct(vector2, vector2);
 
-        static phy_eng::vector2 twoPoints(vector2 p1, vector2 p2);
+        static pheng::vector2 twoPoints(vector2 p1, vector2 p2);
 
         static float norm(vector2 v);
         static float norm(vector2 v1, vector2 v2);

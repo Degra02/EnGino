@@ -1,6 +1,6 @@
 #include "../../include/Rectangle.h"
 
-namespace phy_eng {
+namespace pheng {
 
 
     Rectangle::Rectangle() : Object(){
@@ -29,4 +29,4 @@ namespace phy_eng {
     float Rectangle::getHeight() const {
         return this->height;
     }
-} // phy_eng
+} // pheng
