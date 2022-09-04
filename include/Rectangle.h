@@ -1,7 +1,7 @@
 #ifndef PHYSICSENGINE_RECTANGLE_H
 #define PHYSICSENGINE_RECTANGLE_H
 
-#include "../../include/Object.h"
+#include "Object.h"
 
 namespace phy_eng {
 

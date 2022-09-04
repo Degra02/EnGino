@@ -18,16 +18,20 @@ namespace phy_eng {
 
         float angular_velocity = 0;
 
-        // Graphics
-        sf::Color color = sf::Color::White;
 
         Object();
         Object(vector2 pos, vector2 v, vector2 a, vector2 f, float m);
         Object(vector2 pos, vector2 v, vector2 a, vector2 f, float m, float st_frict, float dn_frict);
         ~Object();
 
+        void setMass(float kg);
+        void setVelocity(vector2);
+        void setPosition(vector2);
+
         void applyForce(vector2 force);
-        void setColor(sf::Color color);
+
+        // Applies change to graphics
+        virtual void applyChange();
     };
 }
 

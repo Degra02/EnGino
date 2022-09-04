@@ -11,6 +11,11 @@ namespace phy_eng{
         vector2();
         vector2(float x, float y);
 
+        void setX(float);
+        void setY(float);
+        float getX();
+        float getY();
+
         vector2 operator +(vector2 v2); // algebraic sum
         vector2 operator -(vector2 v2);
         vector2 operator +=(vector2 v2) const;

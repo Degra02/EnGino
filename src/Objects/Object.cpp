@@ -30,8 +30,19 @@ namespace phy_eng {
         this->Force = force;
     }
 
-    void Object::setColor(sf::Color color) {
-        this->color = color;
+    void Object::setMass(float kg) {
+        this->Mass = kg;
+    }
+
+    void Object::setVelocity(vector2 Velocity) {
+        this->Velocity = Velocity;
+    }
+
+    void Object::setPosition(vector2 Position) {
+        this->Position = Position;
+    }
+
+    void Object::applyChange() {
     }
 }
 

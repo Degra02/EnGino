@@ -17,8 +17,8 @@ namespace phy_eng {
         //assert(this->n == 0);
     }
 
-    void World::addObject(Object *obj) {
-        this->worldObjects.push_back(obj);
+    void World::addObject(Object &obj) {
+        this->worldObjects.push_back(&obj);
         n++;
     }
 
@@ -39,6 +39,8 @@ namespace phy_eng {
             obj->Position += obj->Velocity * dt;
 
             obj->Force = {0.f, 0.f}; // Reinitializing the force applied to the Object
+
+            obj->applyChange();
         }
     }
 } // phy_eng

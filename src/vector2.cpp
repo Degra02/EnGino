@@ -40,3 +40,19 @@ float phy_eng::vector2::norm(phy_eng::vector2 v1, phy_eng::vector2 v2) {
     return std::sqrt(std::pow((v1.x - v2.x), 2) +
                      std::pow((v1.y - v2.y), 2));
 }
+
+void phy_eng::vector2::setX(float x) {
+    this->x = x;
+}
+
+void phy_eng::vector2::setY(float y) {
+    this->y = y;
+}
+
+float phy_eng::vector2::getX() {
+    return this->x;
+}
+
+float phy_eng::vector2::getY() {
+    return this->y;
+}

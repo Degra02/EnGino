@@ -2,6 +2,7 @@
 #define PHYSICSENGINE_WORLD_H
 
 #include <vector>
+#include <SFML/Graphics.hpp>
 #include "Object.h"
 
 namespace phy_eng {
@@ -18,7 +19,7 @@ namespace phy_eng {
         explicit World(float dt);
         ~World();
 
-        void addObject(Object *obj);
+        void addObject(Object &obj);
         void removeObject(Object* obj);
         void step();
     };

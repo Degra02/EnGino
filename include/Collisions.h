@@ -1,13 +1,13 @@
 #ifndef PHYSICSENGINE_COLLISIONS_H
 #define PHYSICSENGINE_COLLISIONS_H
 
-#include "Sphere.h"
+#include "Circle.h"
 
 namespace phy_eng {
 
     class Collisions {
     public:
-        static bool sphereToSphere(Sphere* s1, Sphere *s2);
+        static bool sphereToSphere(Circle* s1, Circle *s2);
     };
 
 }
