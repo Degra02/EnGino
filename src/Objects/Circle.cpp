@@ -4,18 +4,14 @@ namespace phy_eng {
     Circle::Circle() : Object() {
         this->r = 0;
         this->Position = {0, 0};
-        this->circleShape = sf::CircleShape(r);
-        this->circleShape.setPosition(this->Position.getX(), this->Position.getY());
+        initDrawable();
     }
 
     Circle::Circle(float r, vector2 centerPos, float mass) {
         this->r = r;
         setPosition(centerPos);
         setMass(mass);
-        this->circleShape = sf::CircleShape(r);
-        this->circleShape.setPosition(this->Position.getX(), this->Position.getY());
-        this->circleShape.setFillColor(sf::Color::White);
-        this->circleShape.setPointCount(20);
+        initDrawable();
     }
 
     Circle::Circle(float r, vector2 centerPos, float mass, Mobility mobility) {
@@ -23,9 +19,16 @@ namespace phy_eng {
         setPosition(centerPos);
         setMass(mass);
         setMobility(mobility);
+        initDrawable();
+    }
+
+    void Circle::initDrawable() {
         this->circleShape = sf::CircleShape(r);
         this->circleShape.setPosition(this->Position.getX(), this->Position.getY());
-        this->circleShape.setFillColor(sf::Color::White);
+        this->circleShape.setPointCount(20);
+        circleShape.setFillColor(sf::Color::Black);
+        this->circleShape.setOutlineColor(sf::Color::White);
+        this->circleShape.setOutlineThickness(4);
     }
 
     void Circle::setRadius(float r) {

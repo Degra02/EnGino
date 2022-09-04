@@ -22,6 +22,10 @@ namespace phy_eng{
         vector2 operator *(float m);
         vector2 operator /(float m);
 
+        static float dotProduct(vector2, vector2);
+
+        static phy_eng::vector2 twoPoints(vector2 p1, vector2 p2);
+
         static float norm(vector2 v);
         static float norm(vector2 v1, vector2 v2);
     };

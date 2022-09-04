@@ -36,7 +36,6 @@ namespace phy_eng {
         virtual void applyChange();
 
         //Setters
-        const vector2 &getPosition() const;
         void setMass(float kg);
         void setVelocity(vector2);
         void setPosition(vector2);

@@ -1,4 +1,5 @@
 #include "../include/World.h"
+#include "../include/Collisions.h"
 #include <iostream>
 #include <algorithm>
 
@@ -40,9 +41,23 @@ namespace phy_eng {
         if(!isPaused) {
             for (Object* obj: worldObjects){
                 if (obj->mobility == FREE){
+                    for (Object *other: worldObjects){
+                        if(Collisions::objToObj(obj, other)){
+                            if(other->mobility == FIXED){
+
+
+
+
+                            } else {
+
+                            }
+                        }
+                    }
+
                     obj->Force += (this->gravity * obj->Mass);
                     obj->Velocity += (obj->Force / obj->Mass) * dt;
                     obj->Position += (obj->Velocity * dt);
+
 
                     obj->Force = {0.f, 0.f}; // Reinitializing the force applied to the Object
                     obj->applyChange();

@@ -63,37 +63,6 @@ namespace phy_eng {
         this->Force = f;
     }
 
-    const vector2 &Object::getPosition() const {
-        return Position;
-    }
-
-    const vector2 &Object::getVelocity() const {
-        return Velocity;
-    }
-
-    const vector2 &Object::getForce() const {
-        return Force;
-    }
-
-    float Object::getMass() const {
-        return Mass;
-    }
-
-    float Object::getCoefStFrict() const {
-        return coef_st_frict;
-    }
-
-    float Object::getCoefDnFrict() const {
-        return coef_dn_frict;
-    }
-
-    float Object::getAngularVelocity() const {
-        return angular_velocity;
-    }
-
-    Mobility Object::getMobility() const {
-        return mobility;
-    }
 }
 
 

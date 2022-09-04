@@ -42,6 +42,14 @@ float phy_eng::vector2::norm(phy_eng::vector2 v1, phy_eng::vector2 v2) {
                      std::pow((v1.y - v2.y), 2));
 }
 
+float phy_eng::vector2::dotProduct(vector2 v1, vector2 v2) {
+    return (v1.x * v2.x) - (v1.y * v2.y);
+}
+
+phy_eng::vector2 phy_eng::vector2::twoPoints(vector2 p1, vector2 p2) {
+    return {p2.x - p1.x, p2.y - p1.y};
+}
+
 void phy_eng::vector2::setX(float x) {
     this->x = x;
 }

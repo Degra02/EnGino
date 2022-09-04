@@ -11,7 +11,6 @@
 
 int main() {
     phy_eng::World world = phy_eng::World(0.01);
-    world.setGravity({0, -0.1});
 
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Physics Engine");
     world.setConstraints(window.getSize().x, window.getSize().y);

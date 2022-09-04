@@ -16,6 +16,7 @@ namespace phy_eng {
         Circle(float, vector2, float);
         Circle(float, vector2, float, Mobility);
 
+        void initDrawable();
         sf::Drawable& getDrawable() override;
 
         void setRadius(float);
