@@ -34,14 +34,22 @@ namespace phy_eng {
 
     void World::step() {
         for (Object* obj: worldObjects){
-            obj->Force = obj->Force + (this->gravity * obj->Mass);
-            obj->Velocity = obj->Velocity + (obj->Force / obj->Mass) * dt;
-            obj->Position = obj->Position + (obj->Velocity * dt);
+            obj->Force += (this->gravity * obj->Mass);
+            obj->Velocity += (obj->Force / obj->Mass) * dt;
+            obj->Position += (obj->Velocity * dt);
 
             obj->Force = {0.f, 0.f}; // Reinitializing the force applied to the Object
 
             obj->applyChange();
         }
+    }
+
+    void World::setGravity(vector2 value) {
+        this->gravity = value;
+    }
+
+    void World::setDt(float dt) {
+        this->dt = dt;
     }
 } // phy_eng
 

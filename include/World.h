@@ -22,6 +22,9 @@ namespace phy_eng {
         void addObject(Object &obj);
         void removeObject(Object* obj);
         void step();
+
+        void setGravity(vector2 value);
+        void setDt(float dt);
     };
 }
 

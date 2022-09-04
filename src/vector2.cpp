@@ -16,8 +16,9 @@ phy_eng::vector2 phy_eng::vector2::operator+(phy_eng::vector2 v2) {
     return {x + v2.x, y + v2.y};
 }
 
-phy_eng::vector2 phy_eng::vector2::operator+=(phy_eng::vector2 v2) {
-    return {x + v2.x, y + v2.y};
+void phy_eng::vector2::operator+=(phy_eng::vector2 v2) {
+    this->x += v2.x;
+    this->y += v2.y;
 }
 
 phy_eng::vector2 phy_eng::vector2::operator*(float m) {
