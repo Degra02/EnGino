@@ -11,15 +11,15 @@
 
 int main() {
     pheng::World world = pheng::World(0.01);
+    world.setGravity({0, -2});
 
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Physics Engine");
-    world.setConstraints(window.getSize().x, window.getSize().y);
+    world.setConstraints(WIDTH, HEIGHT);
 
-    pheng::Circle circle = pheng::Circle(50, {100, 100}, 10);
-    pheng::Circle circle2 = pheng::Circle(50, {200, 200}, 10);
-    circle2.setMobility(pheng::Mobility::FIXED);
+    pheng::Circle circle = pheng::Circle(25, {200, 200}, 10);
+    circle.setVelocity({10, 5});
 
-    world.addObjects({&circle, &circle2});
+    world.addObjects({&circle});
 
     while (window.isOpen()){
         sf::Event event{};
@@ -38,7 +38,6 @@ int main() {
         window.clear();
 
         world.step();
-
         for (auto &obj: world.worldObjects){
             window.draw(obj->getDrawable());
         }

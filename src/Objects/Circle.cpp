@@ -54,4 +54,15 @@ namespace pheng {
     void Circle::applyChange() {
         this->circleShape.setPosition({this->Position.getX(), -this->Position.getY()});
     }
+
+    void Circle::constraintsCollision(float *constraints) {
+        if (vector2::norm(getCenterPos(), {constraints[0], getCenterPos().getY()}) < getRadius() ||
+            vector2::norm(getCenterPos(), {0, getCenterPos().getY()}) < getRadius()) {
+            Velocity.setX(-Velocity.getX());
+        }
+        if (vector2::norm(getCenterPos(), {getCenterPos().getX(), constraints[1]}) < getRadius() ||
+            vector2::norm(getCenterPos(), {getCenterPos().getX(), 0}) < getRadius()) {
+            Velocity.setY(-Velocity.getY());
+        }
+    }
 } // pheng

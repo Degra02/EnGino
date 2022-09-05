@@ -8,11 +8,11 @@
 namespace pheng {
     class World {
     private:
-        vector2 gravity = vector2(0.0, -9.81f);
+        vector2 gravity = vector2(0.0, -9.81);
         int n = 0; // number of objects currently in the simulation
 
         float dt; // time intervals between a "system frame" and the next one
-        int constraints[2];
+        float constraints[2];
 
         bool isPaused = false;
 
@@ -33,7 +33,9 @@ namespace pheng {
         void setGravity(vector2 value);
         void setDt(float dt);
         void setPaused();
-        void setConstraints(int x, int y);
+
+        void setConstraints(float x, float y);
+        bool checkConstraintsCollision(Object*);
 
         std::vector<Object*> getWorldObjects();
     };

@@ -24,7 +24,8 @@ namespace pheng {
         float getRadius() const;
         vector2 getCenterPos();
 
-        virtual void applyChange();
+        void applyChange() override;
+        void constraintsCollision(float constraints[]) override;
     };
 
 } // pheng

@@ -23,6 +23,8 @@ namespace pheng{
         vector2 operator /(float m);
 
         static float dotProduct(vector2, vector2);
+        static float angle(vector2);
+        static float angleBetween(vector2, vector2);
 
         static pheng::vector2 twoPoints(vector2 p1, vector2 p2);
 

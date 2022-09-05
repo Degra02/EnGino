@@ -16,7 +16,7 @@ namespace pheng {
     }
 
     bool Collisions::circleToCircle(Circle* s1, Circle* s2) {
-        //vector2 collisionLine = vector2::twoPoints(s1->getPosition(), s2->getPosition());
+        vector2 collisionLine = vector2::twoPoints(s1->Position, s2->Position);
 
         if ( vector2::norm(s1->getCenterPos(), s2->getCenterPos()) < s1->getRadius() + s2->getRadius())
             return true;

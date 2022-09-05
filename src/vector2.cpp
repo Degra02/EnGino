@@ -46,6 +46,14 @@ float pheng::vector2::dotProduct(vector2 v1, vector2 v2) {
     return (v1.x * v2.x) - (v1.y * v2.y);
 }
 
+float pheng::vector2::angle(pheng::vector2 v) {
+    return atan2f(v.y, v.x);
+}
+
+float pheng::vector2::angleBetween(pheng::vector2 v1, pheng::vector2 v2) {
+    return std::acos(dotProduct(v1, v2) / (norm(v1 * norm(v2))));
+}
+
 pheng::vector2 pheng::vector2::twoPoints(vector2 p1, vector2 p2) {
     return {p2.x - p1.x, p2.y - p1.y};
 }

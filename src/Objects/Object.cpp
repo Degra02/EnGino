@@ -15,7 +15,7 @@ namespace pheng {
         this->Position = pos;
         this->Velocity = v;
         this->Force = f;
-        this->Mass = m;
+        setMass(m);
         this->mobility = mobility;
     }
 
@@ -24,7 +24,7 @@ namespace pheng {
         this->Position = pos;
         this->Velocity = v;
         this->Force = f;
-        this->Mass = m;
+        setMass(m);
         this->coef_st_frict = st_frict;
         this->coef_dn_frict = dn_frict;
     }
