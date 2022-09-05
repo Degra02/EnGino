@@ -1,25 +1,28 @@
 #include <iostream>
+#include <cmath>
 #include "../include/World.h"
 #include "../include/Circle.h"
-#include "../include/Collisions.h"
 
 //Graphics
 #include <SFML/Graphics.hpp>
 
-#define WIDTH 1000
+#define WIDTH 1500
 #define HEIGHT 1000
+
+void spawnCircle(pheng::World *world);
 
 int main() {
     pheng::World world = pheng::World(0.01);
-    world.setGravity({0, -2});
 
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Physics Engine");
     world.setConstraints(WIDTH, HEIGHT);
 
-    pheng::Circle circle = pheng::Circle(25, {200, 200}, 10);
-    circle.setVelocity({10, 5});
-
-    world.addObjects({&circle});
+    /**
+    for (int i = 0; i < 100; i++){
+        pheng::Circle* c = new pheng::Circle(5, {static_cast<float>(rand() % WIDTH), -static_cast<float>(rand() % HEIGHT)}, 10);
+        c->setVelocity({static_cast<float>(rand() % 25), 0});
+        world.addObject(c);
+    }**/
 
     while (window.isOpen()){
         sf::Event event{};
@@ -31,6 +34,12 @@ int main() {
                 case sf::Event::KeyPressed: {
                     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
                         world.setPaused();
+                    }
+                }
+
+                case sf::Event::MouseButtonPressed: {
+                    if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+                        spawnCircle(&world);
                     }
                 }
             }
@@ -45,4 +54,11 @@ int main() {
         window.display();
     }
 
+}
+
+void spawnCircle(pheng::World *world){
+    auto* c = new pheng::Circle(20, {static_cast<float>(rand() % WIDTH),
+                                     -static_cast<float>(rand() % HEIGHT)}, 10);
+    c->setVelocity({static_cast<float>(rand() % 25), 0});
+    world->addObject(c);
 }

@@ -63,6 +63,10 @@ namespace pheng {
         this->Force = f;
     }
 
+    void Object::constraintsCollision(float *constraints) {
+
+    }
+
 }
 
 

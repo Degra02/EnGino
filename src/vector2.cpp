@@ -33,6 +33,10 @@ pheng::vector2 pheng::vector2::operator-(pheng::vector2 v2) {
     return {this->x - v2.x, this->y - v2.y};
 }
 
+float pheng::vector2::norm() {
+    return std::sqrt(pow(x,2) + pow(y, 2));
+}
+
 float pheng::vector2::norm(pheng::vector2 v) { // Static function
     return std::sqrt(std::pow(v.x, 2) + std::pow(v.y, 2));
 }
@@ -46,6 +50,10 @@ float pheng::vector2::dotProduct(vector2 v1, vector2 v2) {
     return (v1.x * v2.x) - (v1.y * v2.y);
 }
 
+float pheng::vector2::angle() {
+    return atan2f(y, x);
+}
+
 float pheng::vector2::angle(pheng::vector2 v) {
     return atan2f(v.y, v.x);
 }
@@ -56,6 +64,10 @@ float pheng::vector2::angleBetween(pheng::vector2 v1, pheng::vector2 v2) {
 
 pheng::vector2 pheng::vector2::twoPoints(vector2 p1, vector2 p2) {
     return {p2.x - p1.x, p2.y - p1.y};
+}
+
+pheng::vector2 pheng::vector2::fromNormAngle(float norm, float angle) {
+    return {static_cast<float>(norm * cos(angle)), static_cast<float>(norm * sin(angle))};
 }
 
 void pheng::vector2::setX(float x) {

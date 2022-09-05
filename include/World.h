@@ -23,7 +23,7 @@ namespace pheng {
         explicit World(float dt);
         ~World();
 
-        void addObject(Object &obj);
+        void addObject(Object* obj);
         void addObjects(std::vector<Object*> obj);
         void removeObject(Object* obj);
         void step();

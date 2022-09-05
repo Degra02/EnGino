@@ -60,7 +60,7 @@ namespace pheng {
             vector2::norm(getCenterPos(), {0, getCenterPos().getY()}) < getRadius()) {
             Velocity.setX(-Velocity.getX());
         }
-        if (vector2::norm(getCenterPos(), {getCenterPos().getX(), constraints[1]}) < getRadius() ||
+        if (vector2::norm(getCenterPos(), {getCenterPos().getX(), -constraints[1]}) < getRadius() ||
             vector2::norm(getCenterPos(), {getCenterPos().getX(), 0}) < getRadius()) {
             Velocity.setY(-Velocity.getY());
         }

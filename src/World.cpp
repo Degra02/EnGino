@@ -16,14 +16,15 @@ namespace pheng {
     pheng::World::~World() {
     }
 
-    void World::addObject(Object &obj) {
-        this->worldObjects.push_back(&obj);
+    void World::addObject(Object* obj) {
+        this->worldObjects.push_back(obj);
         n++;
     }
 
     void World::addObjects(std::vector<Object*> objects ) {
         for (auto &obj : objects){
-            addObject(*obj);
+            addObject(obj);
+            n++;
         }
     }
 
@@ -50,6 +51,12 @@ namespace pheng {
                     obj->Force = {0.f, 0.f}; // Reinitializing the force applied to the Object
                     obj->applyChange();
                 }
+
+                for (Object* other: worldObjects) {
+                    if (std::cref(other) != std::cref(obj))
+                        pheng::Collisions::circleToCircle(dynamic_cast<Circle *>(obj), dynamic_cast<Circle *>(other));
+                }
+
             }
         }
     }
