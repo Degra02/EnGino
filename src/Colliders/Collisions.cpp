@@ -18,8 +18,16 @@ namespace pheng {
 
     bool Collisions::circleToCircle(Circle* s1, Circle* s2) {
         if ( vector2::norm(s1->getCenterPos(), s2->getCenterPos()) < s1->getRadius() + s2->getRadius()){
+            vector2 v1i = s1->Velocity, v2i = s2->Velocity;
+            float m1 = s1->Mass, m2 = s2->Mass;
+            vector2 v1f = v1i -  (s1->getCenterPos() - s2->getCenterPos()) * (2*m2/(m1 + m2)) *
+                    ((vector2::dotProduct(v1i - v2i, s1->getCenterPos() - s2->getCenterPos())) / pow((v1i - v2i).norm(), 2));
 
+            vector2 v2f = v2i - (s2->getCenterPos() - s1->getCenterPos()) * (2*m1/(m1 + m2)) *
+                                ((vector2::dotProduct(v2i - v1i, s2->getCenterPos() - s1->getCenterPos())) / pow((v2i - v1i).norm(), 2));
 
+            s1->Velocity = v1f;
+            s2->Velocity = v2f;
 
             return true;
         }

@@ -13,16 +13,17 @@ void spawnCircle(pheng::World *world);
 
 int main() {
     pheng::World world = pheng::World(0.01);
+    world.setGravity({0, 0});
 
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Physics Engine");
     world.setConstraints(WIDTH, HEIGHT);
 
-    /**
-    for (int i = 0; i < 100; i++){
+
+    for (int i = 0; i < 20; i++){
         pheng::Circle* c = new pheng::Circle(5, {static_cast<float>(rand() % WIDTH), -static_cast<float>(rand() % HEIGHT)}, 10);
-        c->setVelocity({static_cast<float>(rand() % 25), 0});
+        c->setVelocity({static_cast<float>(rand() % 25), static_cast<float>(rand() % 25)});
         world.addObject(c);
-    }**/
+    }
 
     while (window.isOpen()){
         sf::Event event{};

@@ -47,7 +47,7 @@ float pheng::vector2::norm(pheng::vector2 v1, pheng::vector2 v2) {
 }
 
 float pheng::vector2::dotProduct(vector2 v1, vector2 v2) {
-    return (v1.x * v2.x) - (v1.y * v2.y);
+    return (v1.x * v2.x) + (v1.y * v2.y);
 }
 
 float pheng::vector2::angle() {
