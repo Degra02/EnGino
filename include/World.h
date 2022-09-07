@@ -11,8 +11,8 @@ namespace pheng {
         vector2 gravity = vector2(0.0, -9.81);
         int n = 0; // number of objects currently in the simulation
 
-        float dt; // time intervals between a "system frame" and the next one
-        float constraints[2];
+        double dt; // time intervals between a "system frame" and the next one
+        double constraints[2];
 
         bool isPaused = false;
 
@@ -26,9 +26,9 @@ namespace pheng {
         void addObject(Object* obj);
         void addObjects(std::vector<Object*> obj);
         void removeObject(Object* obj);
-        void step();
+        void removeAll();
 
-
+        void step(double dt);
 
         void setGravity(vector2 value);
         void setDt(float dt);
@@ -36,8 +36,12 @@ namespace pheng {
 
         void setConstraints(float x, float y);
         bool checkConstraintsCollision(Object*);
+        void detectCollisions();
 
         std::vector<Object*> getWorldObjects();
+
+        void spawnCircle(int x, int y);
+
     };
 }
 

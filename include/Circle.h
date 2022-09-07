@@ -8,24 +8,24 @@ namespace pheng {
 
     class Circle : public Object{
     private:
-        float r;
+        double r;
         //this->Position = center position
         sf::CircleShape circleShape = sf::CircleShape(r);
     public:
         Circle();
-        Circle(float, vector2, float);
-        Circle(float, vector2, float, Mobility);
+        Circle(double , vector2, double );
+        Circle(double , vector2, double , Mobility);
 
         void initDrawable();
         sf::Drawable& getDrawable() override;
 
         void setRadius(float);
         void setCenterPos(vector2);
-        float getRadius() const;
+        double getRadius() const;
         vector2 getCenterPos();
 
         void applyChange() override;
-        void constraintsCollision(float constraints[]) override;
+        void constraintsCollision(double constraints[]) override;
     };
 
 } // pheng

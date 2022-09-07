@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <random>
 #include "../include/World.h"
 #include "../include/Circle.h"
 
@@ -8,22 +9,18 @@
 
 #define WIDTH 1500
 #define HEIGHT 1000
+#define FPS_LIMIT 60
 
-void spawnCircle(pheng::World *world);
 
 int main() {
-    pheng::World world = pheng::World(0.01);
-    world.setGravity({0, 0});
+    srand(time(nullptr));
+    pheng::World world = pheng::World();
+    //world.setGravity({0, 0});
 
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Physics Engine");
     world.setConstraints(WIDTH, HEIGHT);
 
-
-    for (int i = 0; i < 20; i++){
-        pheng::Circle* c = new pheng::Circle(5, {static_cast<float>(rand() % WIDTH), -static_cast<float>(rand() % HEIGHT)}, 10);
-        c->setVelocity({static_cast<float>(rand() % 25), static_cast<float>(rand() % 25)});
-        world.addObject(c);
-    }
+   window.setFramerateLimit(FPS_LIMIT);
 
     while (window.isOpen()){
         sf::Event event{};
@@ -35,31 +32,27 @@ int main() {
                 case sf::Event::KeyPressed: {
                     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
                         world.setPaused();
+                    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)){
+                        world.removeAll();
                     }
                 }
 
                 case sf::Event::MouseButtonPressed: {
                     if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-                        spawnCircle(&world);
+                       world.spawnCircle(event.mouseButton.x, event.mouseButton.y);
                     }
                 }
             }
         }
         window.clear();
 
-        world.step();
+        world.step(0.2);
+        world.detectCollisions();
         for (auto &obj: world.worldObjects){
             window.draw(obj->getDrawable());
         }
-
         window.display();
+
     }
 
-}
-
-void spawnCircle(pheng::World *world){
-    auto* c = new pheng::Circle(20, {static_cast<float>(rand() % WIDTH),
-                                     -static_cast<float>(rand() % HEIGHT)}, 10);
-    c->setVelocity({static_cast<float>(rand() % 25), 0});
-    world->addObject(c);
 }

@@ -7,14 +7,14 @@ namespace pheng {
         initDrawable();
     }
 
-    Circle::Circle(float r, vector2 centerPos, float mass) {
+    Circle::Circle(double r, vector2 centerPos, double mass) {
         this->r = r;
         setPosition(centerPos);
         setMass(mass);
         initDrawable();
     }
 
-    Circle::Circle(float r, vector2 centerPos, float mass, Mobility mobility) {
+    Circle::Circle(double r, vector2 centerPos, double mass, Mobility mobility) {
         this->r = r;
         setPosition(centerPos);
         setMass(mass);
@@ -39,7 +39,7 @@ namespace pheng {
         this->Position = centerPos;
     }
 
-    float Circle::getRadius() const {
+    double Circle::getRadius() const {
         return this->r;
     }
 
@@ -52,10 +52,11 @@ namespace pheng {
     }
 
     void Circle::applyChange() {
-        this->circleShape.setPosition({this->Position.getX(), -this->Position.getY()});
+        this->circleShape.setPosition({static_cast<float>(this->getCenterPos().getX()), static_cast<float>(-this->getCenterPos().getY())});
     }
 
-    void Circle::constraintsCollision(float *constraints) {
+    void Circle::constraintsCollision(double *constraints) {
+
         if (vector2::norm(getCenterPos(), {constraints[0], getCenterPos().getY()}) < getRadius() ||
             vector2::norm(getCenterPos(), {0, getCenterPos().getY()}) < getRadius()) {
             Velocity.setX(-Velocity.getX());
@@ -64,5 +65,14 @@ namespace pheng {
             vector2::norm(getCenterPos(), {getCenterPos().getX(), 0}) < getRadius()) {
             Velocity.setY(-Velocity.getY());
         }
+
+        /**
+        if ((getCenterPos().getX() - getRadius()) < 0  || (getCenterPos().getX() + getRadius() > constraints[0])) {
+            Velocity.setX(-Velocity.getX());
+        }
+        if ((-getCenterPos().getY() + getRadius()) < 0 || (getCenterPos().getY() - getRadius()) < constraints[1]) {
+            Velocity.setY(-Velocity.getY());
+        }**/
+
     }
 } // pheng

@@ -2,6 +2,7 @@
 #include "../include/Collisions.h"
 #include <iostream>
 #include <algorithm>
+#include <list>
 
 namespace pheng {
 
@@ -38,7 +39,14 @@ namespace pheng {
         }
     }
 
-    void World::step() {
+    void World::removeAll() {
+        for(auto &obj: worldObjects){
+            worldObjects.pop_back();
+            delete obj;
+        }
+    }
+
+    void World::step(double dt) {
         if(!isPaused) {
             for (Object* obj: worldObjects){
                 if (obj->mobility == FREE){
@@ -51,12 +59,18 @@ namespace pheng {
                     obj->Force = {0.f, 0.f}; // Reinitializing the force applied to the Object
                     obj->applyChange();
                 }
+            }
+        }
+    }
 
-                for (Object* other: worldObjects) {
-                    if (std::cref(other) != std::cref(obj))
-                        pheng::Collisions::circleToCircle(dynamic_cast<Circle *>(obj), dynamic_cast<Circle *>(other));
+    void World::detectCollisions() {
+        //std::list<Object*> intersections;
+        for (auto &obj: worldObjects) {
+            checkConstraintsCollision(obj);
+            for (auto &other: worldObjects) {
+                if (obj != other) {
+                    pheng::Collisions::circleToCircle(dynamic_cast<Circle*>(obj), dynamic_cast<Circle*>(other));
                 }
-
             }
         }
     }
@@ -84,6 +98,13 @@ namespace pheng {
 
     bool World::checkConstraintsCollision(Object* obj) {
         obj->constraintsCollision(constraints);
+    }
+
+    void World::spawnCircle(int x, int y) {
+        auto* c = new pheng::Circle(50, {static_cast<double>(x),
+                                         static_cast<double>(-y)}, 5);
+        c->setVelocity({static_cast<float>(rand() % 10), static_cast<float>(rand() % 10)});
+        addObject(c);
     }
 } // pheng
 

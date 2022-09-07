@@ -10,7 +10,7 @@ namespace pheng {
 
     pheng::Object::~Object() = default;
 
-    pheng::Object::Object(pheng::vector2 pos, pheng::vector2 v, pheng::vector2 a, pheng::vector2 f, float m,
+    pheng::Object::Object(pheng::vector2 pos, pheng::vector2 v, pheng::vector2 a, pheng::vector2 f, double m,
                           Mobility mobility = FREE) {
         this->Position = pos;
         this->Velocity = v;
@@ -20,7 +20,7 @@ namespace pheng {
     }
 
     pheng::Object::Object(pheng::vector2 pos, pheng::vector2 v, pheng::vector2 a, pheng::vector2 f,
-                          float m, float st_frict, float dn_frict) {
+                          double m, double st_frict, double dn_frict) {
         this->Position = pos;
         this->Velocity = v;
         this->Force = f;
@@ -39,7 +39,7 @@ namespace pheng {
     sf::Drawable &Object::getDrawable() {
     }
 
-    void Object::setMass(float kg) {
+    void Object::setMass(double kg) {
         if(kg > 0){
             this->Mass = kg;
         } else {
@@ -63,7 +63,7 @@ namespace pheng {
         this->Force = f;
     }
 
-    void Object::constraintsCollision(float *constraints) {
+    void Object::constraintsCollision(double *constraints) {
 
     }
 

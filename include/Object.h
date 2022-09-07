@@ -13,22 +13,22 @@ namespace pheng {
         vector2 Position;
         vector2 Velocity;
         vector2 Force = {0, 0};
-        float Mass;
+        double Mass;
 
-        float coef_st_frict = 0;
-        float coef_dn_frict = 0;
+        double coef_st_frict = 0;
+        double coef_dn_frict = 0;
 
-        float angular_velocity = 0;
+        double angular_velocity = 0;
 
         Mobility mobility;
 
         Object();
-        Object(vector2 pos, vector2 v, vector2 a, vector2 f, float m, Mobility mobility);
-        Object(vector2 pos, vector2 v, vector2 a, vector2 f, float m, float st_frict, float dn_frict);
+        Object(vector2 pos, vector2 v, vector2 a, vector2 f, double m, Mobility mobility);
+        Object(vector2 pos, vector2 v, vector2 a, vector2 f, double m, double st_frict, double dn_frict);
         ~Object();
 
         void applyForce(vector2 force);
-        virtual void constraintsCollision(float constraints[]);
+        virtual void constraintsCollision(double constraints[]);
 
         // Gets overridden by each subclass
         virtual sf::Drawable& getDrawable();
@@ -37,7 +37,7 @@ namespace pheng {
         virtual void applyChange();
 
         //Setters
-        void setMass(float kg);
+        void setMass(double kg);
         void setVelocity(vector2);
         void setPosition(vector2);
         void setMobility(Mobility);
