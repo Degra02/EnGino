@@ -75,4 +75,18 @@ namespace pheng {
         }**/
 
     }
+
+
+    //Verlet integration
+    void Circle::updatePositionVerlet(double dt) {
+        vector2 velocity = Position - Old_Position;
+        Old_Position = Position;
+
+        //verlet integration formula
+        Position += velocity + Acceleration * dt * dt;
+    }
+
+    void Circle::accelerate(vector2 acc){
+        Acceleration += acc;
+    }
 } // pheng

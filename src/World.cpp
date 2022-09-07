@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <list>
 
+
 namespace pheng {
 
     pheng::World::World() {
@@ -66,7 +67,6 @@ namespace pheng {
     void World::detectCollisions() {
         //std::list<Object*> intersections;
         for (auto &obj: worldObjects) {
-            checkConstraintsCollision(obj);
             for (auto &other: worldObjects) {
                 if (obj != other) {
                     pheng::Collisions::circleToCircle(dynamic_cast<Circle*>(obj), dynamic_cast<Circle*>(other));
@@ -104,7 +104,32 @@ namespace pheng {
         auto* c = new pheng::Circle(50, {static_cast<double>(x),
                                          static_cast<double>(-y)}, 5);
         c->setVelocity({static_cast<float>(rand() % 10), static_cast<float>(rand() % 10)});
+
+        //For Verlet's method
+        c->Old_Position = c->Position;
+
         addObject(c);
+    }
+
+
+
+    // Verlet integration methods
+    void World::update(float dt) {
+        applyGravity();
+        updatePositions(dt);
+    }
+
+    void World::updatePositions(float dt){
+        for(auto &obj: worldObjects){
+            obj->updatePositionVerlet(dt);
+            obj->applyChange();
+        }
+    }
+
+    void World::applyGravity() {
+        for(auto &obj: worldObjects){
+            obj->accelerate(gravity);
+        }
     }
 } // pheng
 

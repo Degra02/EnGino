@@ -42,6 +42,11 @@ namespace pheng {
 
         void spawnCircle(int x, int y);
 
+
+        //With Verlet integration
+        void update(float dt);
+        void updatePositions(float dt);
+        void applyGravity();
     };
 }
 

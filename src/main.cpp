@@ -1,8 +1,6 @@
 #include <iostream>
 #include <cmath>
-#include <random>
 #include "../include/World.h"
-#include "../include/Circle.h"
 
 //Graphics
 #include <SFML/Graphics.hpp>
@@ -15,12 +13,13 @@
 int main() {
     srand(time(nullptr));
     pheng::World world = pheng::World();
-    //world.setGravity({0, 0});
+    world.setGravity({0, -981});
 
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Physics Engine");
     world.setConstraints(WIDTH, HEIGHT);
 
-   window.setFramerateLimit(FPS_LIMIT);
+    window.setFramerateLimit(FPS_LIMIT);
+    float dt = 1.f/60.f;
 
     while (window.isOpen()){
         sf::Event event{};
@@ -46,8 +45,14 @@ int main() {
         }
         window.clear();
 
-        world.step(0.2);
+        //Verlet's integration method
+        //world.update(dt);
+
+        //Normal method
+        world.step(dt);
         world.detectCollisions();
+
+        //Drawing & displaying
         for (auto &obj: world.worldObjects){
             window.draw(obj->getDrawable());
         }

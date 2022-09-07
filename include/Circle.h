@@ -26,6 +26,11 @@ namespace pheng {
 
         void applyChange() override;
         void constraintsCollision(double constraints[]) override;
+
+
+        //Verlet integration
+        void updatePositionVerlet(double dt) override;
+        void accelerate(vector2 acceleration) override;
     };
 
 } // pheng

@@ -42,6 +42,13 @@ namespace pheng {
         void setPosition(vector2);
         void setMobility(Mobility);
         void setForce(vector2);
+
+
+        //Verlet integration
+        vector2 Old_Position;
+        vector2 Acceleration;
+        virtual void updatePositionVerlet(double dt) = 0;
+        virtual void accelerate(vector2 acceleration) = 0;
     };
 }
 
