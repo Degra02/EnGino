@@ -10,6 +10,9 @@ namespace pheng {
         vector2 spawnPosition;
         uint32_t red = 0, green = 0, blue = 0;
 
+        bool isSpawning = false;
+        inline void toggleSpawning() { isSpawning = !isSpawning;}
+
         explicit ObjectSpawner(vector2);
         void spawnObject(World *world);
     };

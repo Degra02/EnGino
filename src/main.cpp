@@ -10,7 +10,7 @@
 #define WIDTH 1500
 #define HEIGHT 1000
 #define FPS_LIMIT 60
-#define SUBSTEPS 10
+#define SUBSTEPS 8
 
 int main() {
     srand(time(nullptr));
@@ -32,7 +32,7 @@ int main() {
     constraint.setOutlineThickness(4);
     constraint.setFillColor(sf::Color::Black);
 
-    pheng::ObjectSpawner spawner({500, 350});
+    pheng::ObjectSpawner spawner({WIDTH/2, HEIGHT/3});
 
     int i = 0;
     while (window.isOpen()){
@@ -47,6 +47,8 @@ int main() {
                         world.setPaused();
                     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)){
                         world.removeAll();
+                    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+                        spawner.toggleSpawning();
                     }
                 }
 
@@ -61,8 +63,8 @@ int main() {
 
         //window.draw(constraint);
 
-        if (i % 100 == 0) {
-            //spawner.spawnObject(&world);
+        if (i % 5 == 0) {
+            spawner.spawnObject(&world);
         }
 
         float dt_sub = dt / SUBSTEPS;
