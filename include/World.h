@@ -7,46 +7,41 @@
 
 namespace pheng {
     class World {
-    private:
-        vector2 gravity = vector2(0.0, -9.81);
+    public:
         int n = 0; // number of objects currently in the simulation
 
         double dt; // time intervals between a "system frame" and the next one
-        double constraints[2];
 
         bool isPaused = false;
 
-    public:
+        vector2 gravity = vector2(0.0, -9.81);
         std::vector<Object*> worldObjects;
+        double constraints[2];
 
         World();
         explicit World(float dt);
-        ~World();
 
+        ~World();
         void addObject(Object* obj);
         void addObjects(std::vector<Object*> obj);
         void removeObject(Object* obj);
+
         void removeAll();
 
         void step(double dt);
-
         void setGravity(vector2 value);
         void setDt(float dt);
-        void setPaused();
 
+        void setPaused();
         void setConstraints(float x, float y);
         bool checkConstraintsCollision(Object*);
+
         void detectCollisions();
 
-        std::vector<Object*> getWorldObjects();
+        std::vector<Object*> getWorldObjects() const;
+
 
         void spawnCircle(int x, int y);
-
-
-        //With Verlet integration
-        void update(float dt);
-        void updatePositions(float dt);
-        void applyGravity();
     };
 }
 

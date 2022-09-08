@@ -25,6 +25,7 @@ namespace pheng {
     void Circle::initDrawable() {
         this->circleShape = sf::CircleShape(r);
         this->circleShape.setPosition(this->Position.getX(), this->Position.getY());
+        circleShape.setOrigin(circleShape.getRadius(), circleShape.getRadius());
         this->circleShape.setPointCount(20);
         circleShape.setFillColor(sf::Color::Black);
         this->circleShape.setOutlineColor(sf::Color::White);
@@ -52,7 +53,7 @@ namespace pheng {
     }
 
     void Circle::applyChange() {
-        this->circleShape.setPosition({static_cast<float>(this->getCenterPos().getX()), static_cast<float>(-this->getCenterPos().getY())});
+        this->circleShape.setPosition({static_cast<float>(this->getCenterPos().getX()), static_cast<float>(this->getCenterPos().getY())});
     }
 
     void Circle::constraintsCollision(double *constraints) {
@@ -61,7 +62,7 @@ namespace pheng {
             vector2::norm(getCenterPos(), {0, getCenterPos().getY()}) < getRadius()) {
             Velocity.setX(-Velocity.getX());
         }
-        if (vector2::norm(getCenterPos(), {getCenterPos().getX(), -constraints[1]}) < getRadius() ||
+        if (vector2::norm(getCenterPos(), {getCenterPos().getX(), constraints[1]}) < getRadius() ||
             vector2::norm(getCenterPos(), {getCenterPos().getX(), 0}) < getRadius()) {
             Velocity.setY(-Velocity.getY());
         }
@@ -83,7 +84,8 @@ namespace pheng {
         Old_Position = Position;
 
         //verlet integration formula
-        Position += velocity + Acceleration * dt * dt;
+        Position = Position + velocity + Acceleration * dt * dt;
+        Acceleration = {0, 0};
     }
 
     void Circle::accelerate(vector2 acc){

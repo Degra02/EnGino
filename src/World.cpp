@@ -56,6 +56,11 @@ namespace pheng {
                     obj->Position += (obj->Velocity * dt);
 
                     checkConstraintsCollision(obj);
+                    for (auto &other: worldObjects) {
+                        if (obj != other) {
+                            pheng::Collisions::circleToCircle(dynamic_cast<Circle*>(obj), dynamic_cast<Circle*>(other));
+                        }
+                    }
 
                     obj->Force = {0.f, 0.f}; // Reinitializing the force applied to the Object
                     obj->applyChange();
@@ -83,7 +88,7 @@ namespace pheng {
         this->dt = dt;
     }
 
-    std::vector<Object*> World::getWorldObjects() {
+    std::vector<Object*> World::getWorldObjects() const {
         return this->worldObjects;
     }
 
@@ -101,35 +106,16 @@ namespace pheng {
     }
 
     void World::spawnCircle(int x, int y) {
-        auto* c = new pheng::Circle(50, {static_cast<double>(x),
-                                         static_cast<double>(-y)}, 5);
-        c->setVelocity({static_cast<float>(rand() % 10), static_cast<float>(rand() % 10)});
+        double r = rand() % (50 - 10 + 1) + 10;
+
+        auto* c = new pheng::Circle(r, {static_cast<double>(x),
+                                         static_cast<double>(y)}, r);
+        //c->setVelocity({static_cast<float>(rand() % 100), static_cast<float>(rand() % 100)});
 
         //For Verlet's method
         c->Old_Position = c->Position;
 
         addObject(c);
-    }
-
-
-
-    // Verlet integration methods
-    void World::update(float dt) {
-        applyGravity();
-        updatePositions(dt);
-    }
-
-    void World::updatePositions(float dt){
-        for(auto &obj: worldObjects){
-            obj->updatePositionVerlet(dt);
-            obj->applyChange();
-        }
-    }
-
-    void World::applyGravity() {
-        for(auto &obj: worldObjects){
-            obj->accelerate(gravity);
-        }
     }
 } // pheng
 

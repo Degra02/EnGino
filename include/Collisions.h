@@ -2,7 +2,6 @@
 #define PHYSICSENGINE_COLLISIONS_H
 
 #include "Circle.h"
-#include "Rectangle.h"
 
 namespace pheng {
 

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include "../include/World.h"
+#include "../include/VerletSolver.h"
 
 //Graphics
 #include <SFML/Graphics.hpp>
@@ -8,18 +9,28 @@
 #define WIDTH 1500
 #define HEIGHT 1000
 #define FPS_LIMIT 60
-
+#define SUBSTEPS 10
 
 int main() {
     srand(time(nullptr));
     pheng::World world = pheng::World();
-    world.setGravity({0, -981});
+    world.setGravity({0, 981});
 
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Physics Engine");
     world.setConstraints(WIDTH, HEIGHT);
 
     window.setFramerateLimit(FPS_LIMIT);
-    float dt = 1.f/60.f;
+    float dt = 1.f/FPS_LIMIT;
+
+    VerletSolver solver(&world);
+
+    sf::CircleShape constraint(400.f);
+    constraint.setOrigin({constraint.getRadius(),constraint.getRadius()});
+    constraint.setPosition({WIDTH/2,HEIGHT/2});
+    constraint.setOutlineColor(sf::Color::White);
+    constraint.setOutlineThickness(4);
+    constraint.setFillColor(sf::Color::Black);
+
 
     while (window.isOpen()){
         sf::Event event{};
@@ -45,12 +56,17 @@ int main() {
         }
         window.clear();
 
-        //Verlet's integration method
-        //world.update(dt);
+        window.draw(constraint);
 
-        //Normal method
-        world.step(dt);
-        world.detectCollisions();
+        float dt_sub = dt / SUBSTEPS;
+        for(int i(0); i < SUBSTEPS; ++i) {
+            //Verlet's integration method
+            solver.update(dt_sub); // --> Doesn't take into account the masses of the various objects
+
+
+            //Normal method
+            //world.step(dt_sub); // --> Calculates the correct response to the collisions
+        }
 
         //Drawing & displaying
         for (auto &obj: world.worldObjects){
