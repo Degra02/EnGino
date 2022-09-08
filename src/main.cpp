@@ -22,7 +22,7 @@ int main() {
     window.setFramerateLimit(FPS_LIMIT);
     float dt = 1.f/FPS_LIMIT;
 
-    VerletSolver solver(&world);
+    pheng::VerletSolver solver(&world);
 
     sf::CircleShape constraint(400.f);
     constraint.setOrigin({constraint.getRadius(),constraint.getRadius()});
