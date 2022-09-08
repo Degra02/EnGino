@@ -4,18 +4,19 @@
 #include <iostream>
 #include "World.h"
 
-class VerletSolver {
-public:
+namespace pheng {
+    class VerletSolver {
+    public:
 
-    pheng::World* world;
+        pheng::World* world;
 
-    VerletSolver(pheng::World *world);
-    void update(float dt);
-    void updatePositions(float dt);
-    void applyGravity();
-    void applyConstraints();
-    void solveCollisions();
-};
-
+        VerletSolver(pheng::World *world);
+        void update(float dt);
+        void updatePositions(float dt);
+        void applyGravity();
+        void applyConstraints();
+        void solveCollisions();
+    };
+}
 
 #endif //PHYSICSENGINE_VERLETSOLVER_H
