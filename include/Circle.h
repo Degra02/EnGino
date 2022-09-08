@@ -7,11 +7,11 @@
 namespace pheng {
 
     class Circle : public Object{
-    private:
+    public:
         double r;
         //this->Position = center position
         sf::CircleShape circleShape = sf::CircleShape(r);
-    public:
+
         Circle();
         Circle(double , vector2, double );
         Circle(double , vector2, double , Mobility);

@@ -2,6 +2,7 @@
 #include <cmath>
 #include "../include/World.h"
 #include "../include/VerletSolver.h"
+#include "../include/ObjectSpawner.h"
 
 //Graphics
 #include <SFML/Graphics.hpp>
@@ -31,7 +32,9 @@ int main() {
     constraint.setOutlineThickness(4);
     constraint.setFillColor(sf::Color::Black);
 
+    pheng::ObjectSpawner spawner({500, 350});
 
+    int i = 0;
     while (window.isOpen()){
         sf::Event event{};
         while (window.pollEvent(event)){
@@ -58,14 +61,18 @@ int main() {
 
         window.draw(constraint);
 
+        if (i % 100 == 0) {
+            //spawner.spawnObject(&world);
+        }
+
         float dt_sub = dt / SUBSTEPS;
         for(int i(0); i < SUBSTEPS; ++i) {
             //Verlet's integration method
-            solver.update(dt_sub); // --> Doesn't take into account the masses of the various objects
+            //solver.update(dt_sub); // --> Doesn't take into account the masses of the various objects
 
 
             //Normal method
-            //world.step(dt_sub); // --> Calculates the correct response to the collisions
+            world.step(dt_sub); // --> Calculates the correct response to the collisions
         }
 
         //Drawing & displaying
@@ -74,6 +81,7 @@ int main() {
         }
         window.display();
 
+        i++;
     }
 
 }

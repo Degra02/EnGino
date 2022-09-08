@@ -10,7 +10,7 @@ namespace pheng {
 
         pheng::World* world;
 
-        VerletSolver(pheng::World *world);
+        explicit VerletSolver(pheng::World *world);
         void update(float dt);
         void updatePositions(float dt);
         void applyGravity();

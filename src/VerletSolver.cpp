@@ -8,10 +8,12 @@ namespace pheng {
     }
 
     void VerletSolver::update(float dt) {
-        applyGravity();
-        applyConstraints();
-        solveCollisions();
-        updatePositions(dt);
+        if (!world->isPaused) {
+            applyGravity();
+            applyConstraints();
+            solveCollisions();
+            updatePositions(dt);
+        }
     }
 
     void VerletSolver::updatePositions(float dt){
