@@ -56,11 +56,6 @@ namespace pheng {
                     obj->Position += (obj->Velocity * dt);
 
                     checkConstraintsCollision(obj);
-                    for (auto &other: worldObjects) {
-                        if (obj != other) {
-                            pheng::Collisions::circleToCircle(dynamic_cast<Circle*>(obj), dynamic_cast<Circle*>(other));
-                        }
-                    }
 
                     obj->Force = {0.f, 0.f}; // Reinitializing the force applied to the Object
                     obj->applyChange();
@@ -69,12 +64,12 @@ namespace pheng {
         }
     }
 
-    void World::detectCollisions() {
+    void World::detectCollisions(float r_f) {
         //std::list<Object*> intersections;
         for (auto &obj: worldObjects) {
             for (auto &other: worldObjects) {
                 if (obj != other) {
-                    pheng::Collisions::circleToCircle(dynamic_cast<Circle*>(obj), dynamic_cast<Circle*>(other));
+                    pheng::Collisions::circleToCircle(dynamic_cast<Circle*>(obj), dynamic_cast<Circle*>(other), r_f);
                 }
             }
         }

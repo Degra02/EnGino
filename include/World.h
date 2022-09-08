@@ -36,7 +36,7 @@ namespace pheng {
         void setConstraints(float x, float y);
         bool checkConstraintsCollision(Object*);
 
-        void detectCollisions();
+        void detectCollisions(float r_f);
 
         std::vector<Object*> getWorldObjects() const;
 

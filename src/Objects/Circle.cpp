@@ -58,22 +58,41 @@ namespace pheng {
 
     void Circle::constraintsCollision(double *constraints) {
 
-        if (vector2::norm(getCenterPos(), {constraints[0], getCenterPos().getY()}) < getRadius() ||
-            vector2::norm(getCenterPos(), {0, getCenterPos().getY()}) < getRadius()) {
+        if (vector2::norm(getCenterPos(), {constraints[0], getCenterPos().getY()}) < getRadius()) {
             Velocity.setX(-Velocity.getX());
-        }
-        if (vector2::norm(getCenterPos(), {getCenterPos().getX(), constraints[1]}) < getRadius() ||
-            vector2::norm(getCenterPos(), {getCenterPos().getX(), 0}) < getRadius()) {
-            Velocity.setY(-Velocity.getY());
-        }
+            double delta = getRadius() - vector2::norm(getCenterPos(), {constraints[0], getCenterPos().getY()});
+            vector2 second_point = {constraints[0], getCenterPos().getY()};
+            vector2 collision_axis = (getCenterPos() - second_point) /
+                    vector2::norm(getCenterPos(), second_point);
 
-        /**
-        if ((getCenterPos().getX() - getRadius()) < 0  || (getCenterPos().getX() + getRadius() > constraints[0])) {
+            Position += collision_axis * delta * 0.5;
+
+        } else if ( vector2::norm(getCenterPos(), {0, getCenterPos().getY()}) < getRadius()) {
             Velocity.setX(-Velocity.getX());
+            double delta = getRadius() - vector2::norm(getCenterPos(), {0, getCenterPos().getY()});
+            vector2 second_point = {0, getCenterPos().getY()};
+            vector2 collision_axis = (getCenterPos() - second_point) /
+                                     vector2::norm(getCenterPos(), second_point);
+
+            Position += collision_axis * delta * 0.5;
         }
-        if ((-getCenterPos().getY() + getRadius()) < 0 || (getCenterPos().getY() - getRadius()) < constraints[1]) {
+        if (vector2::norm(getCenterPos(), {getCenterPos().getX(), constraints[1]}) < getRadius()) {
             Velocity.setY(-Velocity.getY());
-        }**/
+            double delta = getRadius() - vector2::norm(getCenterPos(), {getCenterPos().getX(), constraints[1]});
+            vector2 second_point ={getCenterPos().getX(), constraints[1]};
+            vector2 collision_axis = (getCenterPos() - second_point) /
+                                     vector2::norm(getCenterPos(), second_point);
+
+            Position += collision_axis * delta * 0.5;
+        } else if ( vector2::norm(getCenterPos(), {getCenterPos().getX(), 0}) < getRadius()) {
+            Velocity.setY(-Velocity.getY());
+            double delta = getRadius() - vector2::norm(getCenterPos(), {getCenterPos().getX(), 0});
+            vector2 second_point ={getCenterPos().getX(), 0};
+            vector2 collision_axis = (getCenterPos() - second_point) /
+                                     vector2::norm(getCenterPos(), second_point);
+
+            Position += collision_axis * delta * 0.5;
+        }
 
     }
 

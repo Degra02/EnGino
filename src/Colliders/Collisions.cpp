@@ -4,16 +4,14 @@
 
 namespace pheng {
 
-    bool Collisions::objToObj(Object *o1, Object *o2) {
+    bool Collisions::objToObj(Object *o1, Object *o2, float r_c) {
         if(typeid(o1) == typeid(Circle)){
             if(typeid(o2) == typeid(Circle))
-                return circleToCircle(dynamic_cast<Circle*>(o1), dynamic_cast<Circle*>(o2));
+                return circleToCircle(dynamic_cast<Circle*>(o1), dynamic_cast<Circle*>(o2), r_c);
         }
     }
 
-    bool Collisions::circleToCircle(Circle* s1, Circle* s2) {
-        double restitution_coef = 0.8;
-
+    bool Collisions::circleToCircle(Circle* s1, Circle* s2, double restitution_coef) {
         if ( vector2::norm(s1->getCenterPos(), s2->getCenterPos()) <= (s1->getRadius() + s2->getRadius())){
             double delta = (s1->getRadius() + s2->getRadius()) -
                             vector2::norm(s1->getCenterPos(), s2->getCenterPos());
@@ -33,9 +31,8 @@ namespace pheng {
                                 ((vector2::dotProduct(v2i - v1i, s2->getCenterPos() - s1->getCenterPos())) /
                                 pow((s2->getCenterPos() - s1->getCenterPos()).norm(), 2));
 
-
-            s1->Velocity = v1f;
-            s2->Velocity = v2f;
+            s1->Velocity = v1f * restitution_coef;
+            s2->Velocity = v2f * restitution_coef;
 
 
             return true;

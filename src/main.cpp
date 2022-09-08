@@ -59,7 +59,7 @@ int main() {
         }
         window.clear();
 
-        window.draw(constraint);
+        //window.draw(constraint);
 
         if (i % 100 == 0) {
             //spawner.spawnObject(&world);
@@ -73,6 +73,7 @@ int main() {
 
             //Normal method
             world.step(dt_sub); // --> Calculates the correct response to the collisions
+            world.detectCollisions(0.99);
         }
 
         //Drawing & displaying
