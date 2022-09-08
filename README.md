@@ -15,7 +15,7 @@ Using [Verlet's integration](https://en.wikipedia.org/wiki/Verlet_integration), 
 
 ## TODO
 -- Calculate correct energy loss at collision.  
--- Implement Sweep and Prune algorithm for object collision detection.  
+-- Implement [Sweep and Prune](https://en.wikipedia.org/wiki/Sweep_and_prune) algorithm for object collision detection.  
 -- Add different object types and the respective object collision.  
 -- Implement total energy level.  
 -- Implement rotational objects and fixed objects.  
