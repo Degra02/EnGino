@@ -4,6 +4,7 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "Object.h"
+#include "ObjectSpawner.h"
 
 namespace pheng {
     class World {
@@ -16,6 +17,8 @@ namespace pheng {
 
         vector2 gravity = vector2(0.0, -9.81);
         std::vector<Object*> worldObjects;
+        std::vector<ObjectSpawner*> spawners;
+
         double constraints[2];
 
         World();
@@ -25,10 +28,14 @@ namespace pheng {
         void addObject(Object* obj);
         void addObjects(std::vector<Object*> obj);
         void removeObject(Object* obj);
-
         void removeAll();
 
-        void step(double dt);
+        void addSpawner(ObjectSpawner *spawner);
+        void removeSpawner(ObjectSpawner *spawner);
+        void spawnObjectsSpawner();
+        void toggleSpawners();
+
+        void step(double dt, float r_f);
         void setGravity(vector2 value);
         void setDt(float dt);
 
@@ -36,7 +43,7 @@ namespace pheng {
         void setConstraints(float x, float y);
         bool checkConstraintsCollision(Object*);
 
-        void detectCollisions(float r_f);
+        void detectCollisions(Object* obj, float r_f);
 
         std::vector<Object*> getWorldObjects() const;
 

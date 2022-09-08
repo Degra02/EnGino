@@ -47,7 +47,7 @@ namespace pheng {
         }
     }
 
-    void World::step(double dt) {
+    void World::step(double dt, float r_f = 1) {
         if(!isPaused) {
             for (Object* obj: worldObjects){
                 if (obj->mobility == FREE){
@@ -56,6 +56,7 @@ namespace pheng {
                     obj->Position += (obj->Velocity * dt);
 
                     checkConstraintsCollision(obj);
+                    detectCollisions(obj, r_f);
 
                     obj->Force = {0.f, 0.f}; // Reinitializing the force applied to the Object
                     obj->applyChange();
@@ -64,13 +65,11 @@ namespace pheng {
         }
     }
 
-    void World::detectCollisions(float r_f) {
+    void World::detectCollisions(Object* obj, float r_f) {
         //std::list<Object*> intersections;
-        for (auto &obj: worldObjects) {
-            for (auto &other: worldObjects) {
-                if (obj != other) {
-                    pheng::Collisions::circleToCircle(dynamic_cast<Circle*>(obj), dynamic_cast<Circle*>(other), r_f);
-                }
+        for (auto &other: worldObjects) {
+            if (obj != other) {
+                pheng::Collisions::circleToCircle(dynamic_cast<Circle*>(obj), dynamic_cast<Circle*>(other), r_f);
             }
         }
     }
@@ -111,6 +110,31 @@ namespace pheng {
         c->Old_Position = c->Position;
 
         addObject(c);
+    }
+
+
+    void World::addSpawner(ObjectSpawner *spawner) {
+        spawners.push_back(spawner);
+    }
+
+    void World::removeSpawner(ObjectSpawner* spawner) {
+        auto itr = std::find(spawners.begin(), spawners.end(), spawner);
+        if (itr == spawners.end()) return;
+        spawners.erase(itr);
+    }
+
+    void World::spawnObjectsSpawner() {
+        for (auto &spawner: spawners) {
+            if (spawner->isSpawning) {
+                addObject(spawner->spawnObject());
+            }
+        }
+    }
+
+    void World::toggleSpawners() {
+        for (auto &spawner: spawners) {
+            spawner->toggleSpawning();
+        }
     }
 } // pheng
 

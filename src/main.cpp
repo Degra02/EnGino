@@ -10,7 +10,7 @@
 #define WIDTH 1500
 #define HEIGHT 1000
 #define FPS_LIMIT 60
-#define SUBSTEPS 8
+#define SUBSTEPS 10
 
 int main() {
     srand(time(nullptr));
@@ -22,17 +22,14 @@ int main() {
 
     window.setFramerateLimit(FPS_LIMIT);
     float dt = 1.f/FPS_LIMIT;
+    float dt_sub = dt / SUBSTEPS;
+
+    float restitution_factor = 0.95;
 
     pheng::VerletSolver solver(&world);
 
-    sf::CircleShape constraint(400.f);
-    constraint.setOrigin({constraint.getRadius(),constraint.getRadius()});
-    constraint.setPosition({WIDTH/2,HEIGHT/2});
-    constraint.setOutlineColor(sf::Color::White);
-    constraint.setOutlineThickness(4);
-    constraint.setFillColor(sf::Color::Black);
-
     pheng::ObjectSpawner spawner({WIDTH/2, HEIGHT/3});
+    world.addSpawner(&spawner);
 
     int i = 0;
     while (window.isOpen()){
@@ -48,7 +45,7 @@ int main() {
                     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)){
                         world.removeAll();
                     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-                        spawner.toggleSpawning();
+                        world.toggleSpawners();
                     }
                 }
 
@@ -61,21 +58,18 @@ int main() {
         }
         window.clear();
 
-        //window.draw(constraint);
-
         if (i % 5 == 0) {
-            spawner.spawnObject(&world);
+            world.spawnObjectsSpawner();
         }
 
-        float dt_sub = dt / SUBSTEPS;
         for(int i(0); i < SUBSTEPS; ++i) {
             //Verlet's integration method
             //solver.update(dt_sub); // --> Doesn't take into account the masses of the various objects
 
 
             //Normal method
-            world.step(dt_sub); // --> Calculates the correct response to the collisions
-            world.detectCollisions(0.99);
+            world.step(dt_sub, restitution_factor); // --> Calculates the correct response to the collisions
+
         }
 
         //Drawing & displaying

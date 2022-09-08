@@ -2,7 +2,7 @@
 #define PHYSICSENGINE_OBJECTSPAWNER_H
 
 #include "vector2.h"
-#include "World.h"
+#include "Object.h"
 
 namespace pheng {
     class ObjectSpawner {
@@ -14,7 +14,7 @@ namespace pheng {
         inline void toggleSpawning() { isSpawning = !isSpawning;}
 
         explicit ObjectSpawner(vector2);
-        void spawnObject(World *world);
+        Object* spawnObject();
     };
 }
 
