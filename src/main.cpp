@@ -2,7 +2,6 @@
 #include <cmath>
 #include "../include/World.h"
 #include "../include/VerletSolver.h"
-#include "../include/ObjectSpawner.h"
 
 //Graphics
 #include <SFML/Graphics.hpp>
