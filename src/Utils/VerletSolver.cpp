@@ -1,6 +1,6 @@
 
-#include "../include/VerletSolver.h"
-#include "../include/Circle.h"
+#include "../../include/VerletSolver.h"
+#include "../../include/Circle.h"
 
 namespace pheng {
     VerletSolver::VerletSolver(pheng::World *world) {
@@ -29,8 +29,8 @@ namespace pheng {
         }
     }
 
-    void VerletSolver::applyConstraints() { // Circular constraints
-        pheng::vector2 position{world->constraints[0]/2, world->constraints[1]/2};
+    void VerletSolver::applyConstraints() { // Circular window_constraints
+        pheng::vector2 position{world->window_constraints[0] / 2, world->window_constraints[1] / 2};
         float radius = 400.f;
         for (auto &obj: world->worldObjects) {
             pheng::vector2 to_obj = obj->Position - position;

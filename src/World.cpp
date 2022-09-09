@@ -65,11 +65,11 @@ namespace pheng {
         }
     }
 
-    void World::detectCollisions(Object* obj, float r_f) {
+    void World::detectCollisions(Object* obj, float r_c) {
         //std::list<Object*> intersections;
         for (auto &other: worldObjects) {
             if (obj != other) {
-                pheng::Collisions::circleToCircle(dynamic_cast<Circle*>(obj), dynamic_cast<Circle*>(other), r_f);
+                pheng::Collisions::objToObj(obj, other, r_c);
             }
         }
     }
@@ -91,12 +91,12 @@ namespace pheng {
     }
 
     void World::setConstraints(float x, float y) {
-        this->constraints[0] = x;
-        this->constraints[1] = y;
+        this->window_constraints[0] = x;
+        this->window_constraints[1] = y;
     }
 
     bool World::checkConstraintsCollision(Object* obj) {
-        obj->constraintsCollision(constraints);
+        obj->constraintsCollision(window_constraints);
     }
 
     void World::spawnCircle(int x, int y) {
@@ -125,7 +125,7 @@ namespace pheng {
 
     void World::spawnObjectsSpawner() {
         for (auto &spawner: spawners) {
-            if (spawner->isSpawning) {
+            if (spawner->isSpawning && !isPaused) {
                 addObject(spawner->spawnObject());
             }
         }

@@ -19,7 +19,7 @@ namespace pheng {
         std::vector<Object*> worldObjects;
         std::vector<ObjectSpawner*> spawners;
 
-        double constraints[2];
+        double window_constraints[2];
 
         World();
         explicit World(float dt);
@@ -43,7 +43,7 @@ namespace pheng {
         void setConstraints(float x, float y);
         bool checkConstraintsCollision(Object*);
 
-        void detectCollisions(Object* obj, float r_f);
+        void detectCollisions(Object* obj, float r_c);
 
         std::vector<Object*> getWorldObjects() const;
 

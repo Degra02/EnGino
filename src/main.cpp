@@ -24,12 +24,13 @@ int main() {
     float dt = 1.f/FPS_LIMIT;
     float dt_sub = dt / SUBSTEPS;
 
-    float restitution_factor = 0.95;
+    float restitution_coef = 0.95;
 
     pheng::VerletSolver solver(&world);
 
-    pheng::ObjectSpawner spawner({WIDTH/2, HEIGHT/3});
-    world.addSpawner(&spawner);
+    pheng::ObjectSpawner spawner();
+    world.addSpawner(new pheng::ObjectSpawner({WIDTH/1.5, HEIGHT/3}));
+    world.addSpawner(new pheng::ObjectSpawner({WIDTH/3, HEIGHT/3}));
 
     int i = 0;
     while (window.isOpen()){
@@ -68,7 +69,7 @@ int main() {
 
 
             //Normal method
-            world.step(dt_sub, restitution_factor); // --> Calculates the correct response to the collisions
+            world.step(dt_sub, restitution_coef); // --> Calculates the correct response to the collisions
 
         }
 

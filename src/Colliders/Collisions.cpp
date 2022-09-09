@@ -5,9 +5,10 @@
 namespace pheng {
 
     bool Collisions::objToObj(Object *o1, Object *o2, float r_c) {
-        if(typeid(o1) == typeid(Circle)){
-            if(typeid(o2) == typeid(Circle))
+        if (dynamic_cast<Circle*>(o1) != nullptr) {
+            if (dynamic_cast<Circle*>(o2) != nullptr)
                 return circleToCircle(dynamic_cast<Circle*>(o1), dynamic_cast<Circle*>(o2), r_c);
+
         }
     }
 
@@ -38,6 +39,10 @@ namespace pheng {
             return true;
         }
         return false;
+    }
+
+    bool Collisions::circleToRectangle(Circle *c, Rectangle *r) {
+
     }
 
 } // pheng
