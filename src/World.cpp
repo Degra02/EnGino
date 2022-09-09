@@ -126,7 +126,9 @@ namespace pheng {
     void World::spawnObjectsSpawner() {
         for (auto &spawner: spawners) {
             if (spawner->isSpawning && !isPaused) {
-                addObject(spawner->spawnObject());
+                Object* obj = spawner->spawnObject();
+                if (obj != nullptr)
+                    addObject(obj);
             }
         }
     }

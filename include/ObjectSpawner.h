@@ -9,11 +9,13 @@ namespace pheng {
     public:
         vector2 spawnPosition;
         uint32_t red = 0, green = 0, blue = 0;
+        uint32_t spawnRate;
+        uint32_t spawnCounter = 0;
 
         bool isSpawning = false;
         inline void toggleSpawning() { isSpawning = !isSpawning;}
 
-        explicit ObjectSpawner(vector2);
+        explicit ObjectSpawner(vector2, uint32_t spawnRate);
         Object* spawnObject();
     };
 }

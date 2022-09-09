@@ -29,10 +29,9 @@ int main() {
     pheng::VerletSolver solver(&world);
 
     pheng::ObjectSpawner spawner();
-    world.addSpawner(new pheng::ObjectSpawner({WIDTH/1.5, HEIGHT/3}));
-    world.addSpawner(new pheng::ObjectSpawner({WIDTH/3, HEIGHT/3}));
+    world.addSpawner(new pheng::ObjectSpawner({WIDTH/1.5, HEIGHT/3.f}, 10));
+    world.addSpawner(new pheng::ObjectSpawner({WIDTH/3.f, HEIGHT/3.f}, 5));
 
-    int i = 0;
     while (window.isOpen()){
         sf::Event event{};
         while (window.pollEvent(event)){
@@ -59,14 +58,11 @@ int main() {
         }
         window.clear();
 
-        if (i % 5 == 0) {
-            world.spawnObjectsSpawner();
-        }
+        world.spawnObjectsSpawner();
 
         for(int i(0); i < SUBSTEPS; ++i) {
             //Verlet's integration method
             //solver.update(dt_sub); // --> Doesn't take into account the masses of the various objects
-
 
             //Normal method
             world.step(dt_sub, restitution_coef); // --> Calculates the correct response to the collisions
@@ -78,8 +74,6 @@ int main() {
             window.draw(obj->getDrawable());
         }
         window.display();
-
-        i++;
     }
 
 }
