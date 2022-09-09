@@ -15,6 +15,7 @@ namespace pheng {
         Circle();
         Circle(double , vector2, double );
         Circle(double , vector2, double , Mobility);
+        ~Circle() override;
 
         void initDrawable();
         sf::Drawable& getDrawable() override;
@@ -26,6 +27,8 @@ namespace pheng {
 
         void applyChange() override;
         void constraintsCollision(double constraints[]) override;
+
+        float calculateEnergy(double h, double g) override;
 
 
         //Verlet integration

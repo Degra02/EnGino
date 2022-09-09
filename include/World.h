@@ -10,7 +10,7 @@
 namespace pheng {
     class World {
     public:
-        int n = 0; // number of objects currently in the simulation
+        uint32_t n = 0; // number of objects currently in the simulation
         double dt; // time intervals between a "system frame" and the next one
         bool isPaused = false;
 
@@ -20,9 +20,10 @@ namespace pheng {
         double window_constraints[2];
 
         double total_energy = 0;
-        sf::Text totalEnergy;
 
-        World(const sf::Font& font);
+        sf::Text Legend;
+
+        explicit World(const sf::Font& font);
         explicit World(float dt);
 
         ~World();
@@ -41,12 +42,14 @@ namespace pheng {
         void setDt(float dt);
 
         void setPaused();
+
         void updateEnergy(Object* obj);
+        void updateLegend();
 
         void setConstraints(float x, float y);
         bool checkConstraintsCollision(Object*);
 
-        void detectCollisions(Object* obj, float r_c);
+        void detectCollisions(uint32_t i, Object* obj, float r_c);
 
         std::vector<Object*> getWorldObjects() const;
 

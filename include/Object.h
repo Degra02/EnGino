@@ -27,7 +27,7 @@ namespace pheng {
         Object();
         Object(vector2 pos, vector2 v, vector2 a, vector2 f, double m, Mobility mobility);
         Object(vector2 pos, vector2 v, vector2 a, vector2 f, double m, double st_frict, double dn_frict);
-        ~Object();
+        virtual ~Object();
 
         void applyForce(vector2 force);
         virtual void constraintsCollision(double constraints[]);
@@ -52,7 +52,7 @@ namespace pheng {
         virtual void updatePositionVerlet(double dt) = 0;
         virtual void accelerate(vector2 acceleration) = 0;
 
-        double calculateEnergy(double h, double g);
+        virtual float calculateEnergy(double h, double g);
     };
 }
 

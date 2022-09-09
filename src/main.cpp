@@ -33,7 +33,7 @@ int main() {
 
     pheng::VerletSolver solver(&world);
 
-    world.addSpawner(new pheng::ObjectSpawner({WIDTH/1.5, HEIGHT/3.f}, 10));
+    world.addSpawner(new pheng::ObjectSpawner({WIDTH/1.5, HEIGHT/3.f}, 1));
     world.addSpawner(new pheng::ObjectSpawner({WIDTH/3.f, HEIGHT/3.f}, 5));
 
 
@@ -77,7 +77,7 @@ int main() {
         for (auto &obj: world.worldObjects){
             window.draw(obj->getDrawable());
         }
-        window.draw(world.totalEnergy);
+        window.draw(world.Legend);
 
         window.display();
     }

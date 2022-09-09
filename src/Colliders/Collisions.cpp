@@ -10,6 +10,7 @@ namespace pheng {
                 return circleToCircle(dynamic_cast<Circle*>(o1), dynamic_cast<Circle*>(o2), r_c);
 
         }
+        return false;
     }
 
     bool Collisions::circleToCircle(Circle* s1, Circle* s2, double restitution_coef) {

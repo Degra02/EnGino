@@ -22,6 +22,10 @@ namespace pheng {
         initDrawable();
     }
 
+    Circle::~Circle() {
+        Object::~Object();
+    }
+
     void Circle::initDrawable() {
         this->circleShape = sf::CircleShape(r);
         this->circleShape.setPosition(this->Position.getX(), this->Position.getY());
@@ -96,6 +100,10 @@ namespace pheng {
 
     }
 
+
+    float Circle::calculateEnergy(double h, double g) {
+        return Object::calculateEnergy(h - getRadius(), g);
+    }
 
     //Verlet integration
     void Circle::updatePositionVerlet(double dt) {
