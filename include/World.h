@@ -2,6 +2,7 @@
 #define PHYSICSENGINE_WORLD_H
 
 #include <vector>
+#include <iomanip>
 #include <SFML/Graphics.hpp>
 #include "Object.h"
 #include "ObjectSpawner.h"
@@ -10,18 +11,18 @@ namespace pheng {
     class World {
     public:
         int n = 0; // number of objects currently in the simulation
-
         double dt; // time intervals between a "system frame" and the next one
-
         bool isPaused = false;
 
         vector2 gravity = vector2(0.0, -9.81);
         std::vector<Object*> worldObjects;
         std::vector<ObjectSpawner*> spawners;
-
         double window_constraints[2];
 
-        World();
+        double total_energy = 0;
+        sf::Text totalEnergy;
+
+        World(const sf::Font& font);
         explicit World(float dt);
 
         ~World();
@@ -40,6 +41,8 @@ namespace pheng {
         void setDt(float dt);
 
         void setPaused();
+        void updateEnergy(Object* obj);
+
         void setConstraints(float x, float y);
         bool checkConstraintsCollision(Object*);
 

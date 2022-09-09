@@ -15,6 +15,8 @@ namespace pheng {
         vector2 Force = {0, 0};
         double Mass;
 
+        double Energy;
+
         double coef_st_frict = 0;
         double coef_dn_frict = 0;
 
@@ -49,6 +51,8 @@ namespace pheng {
         vector2 Acceleration;
         virtual void updatePositionVerlet(double dt) = 0;
         virtual void accelerate(vector2 acceleration) = 0;
+
+        double calculateEnergy(double h, double g);
     };
 }
 

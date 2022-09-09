@@ -14,7 +14,11 @@
 
 int main() {
     srand(time(nullptr));
-    pheng::World world = pheng::World();
+
+    sf::Font font;
+    font.loadFromFile("font.TTF");
+
+    pheng::World world = pheng::World(font);
     world.setGravity({0, 981});
 
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Physics Engine");
@@ -24,13 +28,14 @@ int main() {
     float dt = 1.f/FPS_LIMIT;
     float dt_sub = dt / SUBSTEPS;
 
-    float restitution_coef = 0.95;
+    // Percentage of velocity kept after each collision
+    float restitution_coef = 1;
 
     pheng::VerletSolver solver(&world);
 
-    pheng::ObjectSpawner spawner();
     world.addSpawner(new pheng::ObjectSpawner({WIDTH/1.5, HEIGHT/3.f}, 10));
     world.addSpawner(new pheng::ObjectSpawner({WIDTH/3.f, HEIGHT/3.f}, 5));
+
 
     while (window.isOpen()){
         sf::Event event{};
@@ -66,13 +71,14 @@ int main() {
 
             //Normal method
             world.step(dt_sub, restitution_coef); // --> Calculates the correct response to the collisions
-
         }
 
         //Drawing & displaying
         for (auto &obj: world.worldObjects){
             window.draw(obj->getDrawable());
         }
+        window.draw(world.totalEnergy);
+
         window.display();
     }
 

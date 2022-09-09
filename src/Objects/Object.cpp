@@ -67,6 +67,11 @@ namespace pheng {
 
     }
 
+    double Object::calculateEnergy(double h, double g) {
+        return 0.5 * Mass * Velocity.norm() * Velocity.norm() +
+               Mass * g * (h - Position.getY());
+    }
+
 }
 
 

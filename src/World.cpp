@@ -3,12 +3,18 @@
 #include <iostream>
 #include <algorithm>
 #include <list>
+#include <cmath>
 
 
 namespace pheng {
 
-    pheng::World::World() {
+    pheng::World::World(const sf::Font& font) {
         dt = 0;
+
+        totalEnergy.setFont(font);
+        totalEnergy.setCharacterSize(24);
+        totalEnergy.setFillColor(sf::Color::White);
+        totalEnergy.setPosition({50, 50});
     }
 
     World::World(float dt) {
@@ -48,6 +54,7 @@ namespace pheng {
     }
 
     void World::step(double dt, float r_f = 1) {
+        total_energy = 0;
         if(!isPaused) {
             for (Object* obj: worldObjects){
                 if (obj->mobility == FREE){
@@ -60,9 +67,18 @@ namespace pheng {
 
                     obj->Force = {0.f, 0.f}; // Reinitializing the force applied to the Object
                     obj->applyChange();
+
+                    updateEnergy(obj);
                 }
             }
         }
+    }
+
+    void World::updateEnergy(Object* obj) {
+        total_energy += obj->calculateEnergy(window_constraints[1], gravity.getY() / 100.f);
+        std::stringstream s;
+        s << "Energy: " << std::setprecision(3) << total_energy;
+        totalEnergy.setString(s.str());
     }
 
     void World::detectCollisions(Object* obj, float r_c) {
@@ -99,6 +115,7 @@ namespace pheng {
         obj->constraintsCollision(window_constraints);
     }
 
+
     void World::spawnCircle(int x, int y) {
         double r = rand() % (50 - 10 + 1) + 10;
 
@@ -111,7 +128,6 @@ namespace pheng {
 
         addObject(c);
     }
-
 
     void World::addSpawner(ObjectSpawner *spawner) {
         spawners.push_back(spawner);
