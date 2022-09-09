@@ -48,10 +48,13 @@ namespace pheng {
     }
 
     void World::removeAll() {
-        for( auto it(worldObjects.begin()); it != worldObjects.end(); ++it) {
-            worldObjects.erase(it);
+        for(uint32_t i(0); i < n; ++i){
+            Object* obj = worldObjects[i];
+            worldObjects.pop_back();
+            delete obj;
         }
-        n = 0;
+        n = 0; total_energy = 0;
+        updateLegend();
     }
 
     void World::step(double dt, float r_f = 1) {

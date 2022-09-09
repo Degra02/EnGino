@@ -33,8 +33,8 @@ int main() {
 
     pheng::VerletSolver solver(&world);
 
-    world.addSpawner(new pheng::ObjectSpawner({WIDTH/1.5, HEIGHT/3.f}, 1));
-    world.addSpawner(new pheng::ObjectSpawner({WIDTH/3.f, HEIGHT/3.f}, 5));
+    world.addSpawner(new pheng::ObjectSpawner({WIDTH/2.f , HEIGHT/3.f}, 1));
+    //world.addSpawner(new pheng::ObjectSpawner({WIDTH/3.f, HEIGHT/3.f}, 5));
 
 
     while (window.isOpen()){
