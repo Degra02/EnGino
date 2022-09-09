@@ -20,7 +20,7 @@ int main() {
     pheng::World world = pheng::World(font);
     world.setGravity({0, 981});
 
-    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Physics Engine");
+    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "EnGino");
     world.setConstraints(WIDTH, HEIGHT);
 
     window.setFramerateLimit(FPS_LIMIT);
