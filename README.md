@@ -1,4 +1,5 @@
-# Physics Engine
+# EnGino
+Personal Physics Engine.
 
 Currently there are two different implementations of position calculus.  
 It still is a WIP, and will be for a long time.
@@ -10,7 +11,7 @@ Currently utilizes a restitution coefficient that simulates energy loss during c
 
 
 ## Verlet's integration
-Using [Verlet's integration](https://en.wikipedia.org/wiki/Verlet_integration), the object's position and collision resposne is approximated, meaning that it's really cool to see but not "accurate" in terms of "physics simulation".
+Using [Verlet's integration](https://en.wikipedia.org/wiki/Verlet_integration), the object's position and collision response is approximated, meaning that it's not "accurate" in terms of physics simulation but faster computational times.  
 
 
 ## TODO
