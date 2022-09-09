@@ -10,7 +10,7 @@
 #define WIDTH 1500
 #define HEIGHT 1000
 #define FPS_LIMIT 60
-#define SUBSTEPS 10
+#define SUBSTEPS 10 //Accuracy of the simulation
 
 int main() {
     srand(time(nullptr));
@@ -73,11 +73,7 @@ int main() {
             world.step(dt_sub, restitution_coef); // --> Calculates the correct response to the collisions
         }
 
-        //Drawing & displaying
-        for (auto &obj: world.worldObjects){
-            window.draw(obj->getDrawable());
-        }
-        window.draw(world.Legend);
+        world.drawObjects(&window);
 
         window.display();
     }

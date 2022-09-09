@@ -163,6 +163,15 @@ namespace pheng {
             spawner->toggleSpawning();
         }
     }
+
+
+    //Drawing objects
+    void World::drawObjects(sf::RenderWindow *window) {
+        for (auto &obj: worldObjects) {
+            window->draw(obj->getDrawable());
+        }
+        window->draw(Legend);
+    }
 } // pheng
 
 
