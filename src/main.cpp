@@ -35,10 +35,9 @@ int main() {
     world.addSpawner(new pheng::ObjectSpawner({WIDTH/2.f , HEIGHT/3.f}, 1));
     //world.addSpawner(new pheng::ObjectSpawner({WIDTH/3.f, HEIGHT/3.f}, 5));
 
-    sf::Texture texture;
-
+    /**sf::Texture texture;
     std::string filename = "/home/degra/Coding/C++/EnGino/Renders/";
-    texture.create(WIDTH, HEIGHT);
+    texture.create(WIDTH, HEIGHT);**/
 
     int number = 0;
     while (window.isOpen()){
@@ -81,11 +80,12 @@ int main() {
 
         window.display();
 
+        /**
         texture.update(window);
         char s[12];
         sprintf(s, "img_%03d.png", number);
         texture.copyToImage().saveToFile(filename + s);
-        number++;
+        number++;**/
     }
 
 }
