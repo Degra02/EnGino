@@ -98,13 +98,7 @@ namespace pheng {
     }
 
     void World::detectCollisionsSweetAndPrune() {
-        std::vector<Object*> possibleCollision = SweepAndPrune::getPossibleCollisions(worldObjects);
-
-        for (uint32_t i(0); i < possibleCollision.size(); ++i) {
-            for (uint32_t j(i); j < possibleCollision.size(); ++j){
-                pheng::Collisions::objToObj(worldObjects[i], worldObjects[j], r_c);
-            }
-        }
+        SweepAndPrune::getPossibleCollisions(worldObjects);
     }
 
     void World::setGravity(vector2 value) {
