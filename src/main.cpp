@@ -2,7 +2,7 @@
 #include <cmath>
 #include "../include/World.h"
 #include "../include/VerletSolver.h"
-#include "Render.h"
+#include "../include/Render.h"
 
 //Graphics
 #include <SFML/Graphics.hpp>
