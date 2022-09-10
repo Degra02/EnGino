@@ -21,8 +21,8 @@ With the *Render* class it's possible to render each frame (framerate is modifia
 Then by using [ffmpeg](https://ffmpeg.org/) a video can be created from the frames rendered.
 
 ## TODO
--- Calculate correct energy loss at collision.  
--- Implement [Sweep and Prune](https://en.wikipedia.org/wiki/Sweep_and_prune) algorithm for object collision detection.  
--- Add different object types and the respective object collision.  
--- Implement total energy level.  
--- Implement rotational objects and fixed objects.  
+* Calculate correct energy loss at collision.  
+* Implement [Sweep and Prune](https://en.wikipedia.org/wiki/Sweep_and_prune) algorithm for object collision detection.  
+* Add different object types and the respective object collision.  
+* Implement total energy level.  
+* Implement rotational objects and fixed objects.  
