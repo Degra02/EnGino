@@ -11,7 +11,7 @@ namespace pheng {
         T o1;
         T o2;
 
-        Pair(T _o1, T _o2) {o1 = _o1; o2 = _o2;}
+        Pair<T>(T _o1, T _o2) {o1 = _o1; o2 = _o2;}
     };
 
     template<typename T>
@@ -24,6 +24,12 @@ namespace pheng {
 
         void addPair(T o1, T o2);
     };
+
+    template<typename T>
+    void PairsList<T>::addPair(T o1, T o2) {
+        Pair<T> p(o1, o2);
+        pairs.push_back(p);
+    }
 
 } // pheng
 

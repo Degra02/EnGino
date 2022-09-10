@@ -8,9 +8,8 @@
 namespace pheng {
     class SweepAndPrune {
     public:
-        static std::vector<Object*> getPossibleCollisions(std::vector<Object*> worldObjects);
+        static void getPossibleCollisions(std::vector<Object*> worldObjects);
         static bool sortByXLeft(Object* o1, Object* o2);
-        static void checkEffectiveCollisions(Object* o1, Object* o2, std::vector<Object*> activeList);
     };
 }
 

@@ -1,35 +1,36 @@
 #include "../../include/SweepAndPrune.h"
 #include "../../include/Collisions.h"
+#include "../../include/PairsList.h"
 
 namespace pheng {
 
-    std::vector<Object *> SweepAndPrune::getPossibleCollisions(std::vector<Object*> worldObjects) {
+    void SweepAndPrune::getPossibleCollisions(std::vector<Object*> worldObjects) {
 
         std::sort(worldObjects.begin(), worldObjects.end(), sortByXLeft);
         std::vector<Object*> activeList;
+        activeList.push_back(worldObjects[0]);
 
-        for(uint32_t i(0); i < worldObjects.size(); ++i){
-            activeList.push_back(worldObjects[i]);
+        pheng::PairsList<Object*> pairsList;
+
+        for(uint32_t i(1); i < worldObjects.size(); ++i){
             for (uint32_t j(0); j < activeList.size(); ++j) {
-                if (worldObjects[i]->Position.getX() + worldObjects[i]->getSize() >
-                        activeList[j]->Position.getX() - activeList[j]->getSize()) {
-                   activeList.push_back(worldObjects[i]);
+                if (worldObjects[i]->Position.getX() - worldObjects[i]->getSize() <
+                        activeList[j]->Position.getX() + activeList[j]->getSize()) {
+                    pairsList.addPair(worldObjects[i], activeList[j]);
                 } else {
                     activeList.erase(activeList.begin() + j);
                 }
             }
+            activeList.push_back(worldObjects[i]);
         }
 
-        return activeList;
+        for (auto &pair: pairsList.pairs) {
+            pheng::Collisions::objToObj(pair.o1, pair.o2, 1);
+        }
     }
 
     bool SweepAndPrune::sortByXLeft(Object* o1, Object* o2) {
         return (o1->Position.getX() < o2->Position.getX());
-    }
-
-    void SweepAndPrune::checkEffectiveCollisions(Object* o1, Object* o2, std::vector<Object*> activeList) {
-        if (pheng::Collisions::areColliding(o1, o2))
-            activeList.push_back(o2);
     }
 
 
