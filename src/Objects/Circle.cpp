@@ -56,9 +56,14 @@ namespace pheng {
         return circleShape;
     }
 
+    double Circle::getSize() {
+        return getRadius();
+    }
+
     void Circle::applyChange() {
         this->circleShape.setPosition({static_cast<float>(this->getCenterPos().getX()), static_cast<float>(this->getCenterPos().getY())});
     }
+
 
     void Circle::constraintsCollision(double *constraints) {
 
@@ -99,7 +104,6 @@ namespace pheng {
         }
 
     }
-
 
     float Circle::calculateEnergy(double h, double g) {
         return Object::calculateEnergy(h - getRadius(), g);

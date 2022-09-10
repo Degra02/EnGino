@@ -35,6 +35,8 @@ namespace pheng {
         // Gets overridden by each subclass
         virtual sf::Drawable& getDrawable();
 
+        virtual double getSize() = 0;
+
         // Applies change to graphics
         virtual void applyChange();
 

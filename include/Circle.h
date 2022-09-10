@@ -20,6 +20,8 @@ namespace pheng {
         void initDrawable();
         sf::Drawable& getDrawable() override;
 
+        double getSize() override;
+
         void setRadius(float);
         void setCenterPos(vector2);
         double getRadius() const;

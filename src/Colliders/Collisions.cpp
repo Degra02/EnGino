@@ -46,4 +46,16 @@ namespace pheng {
 
     }
 
+
+
+    bool Collisions::areColliding(Object *o1, Object *o2) {
+        if (dynamic_cast<Circle*>(o1) != nullptr) {
+            if (dynamic_cast<Circle*>(o2) != nullptr)
+                return (vector2::norm(dynamic_cast<Circle*>(o1)->getCenterPos(), dynamic_cast<Circle*>(o2)->getCenterPos()) <=
+                (dynamic_cast<Circle*>(o1)->getRadius() + dynamic_cast<Circle*>(o2)->getRadius()));
+
+        }
+        return false;
+    }
+
 } // pheng

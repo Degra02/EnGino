@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "Object.h"
 #include "ObjectSpawner.h"
+#include "SweepAndPrune.h"
 
 namespace pheng {
 
@@ -15,6 +16,7 @@ namespace pheng {
         double dt; // time intervals between a "system frame" and the next one
         vector2 gravity = vector2(0.0, 981); //negative y-values mean "upward"
         double window_constraints[2];
+        float r_c = 1;
 
         bool isPaused = false;
 
@@ -45,7 +47,8 @@ namespace pheng {
         void setConstraints(float x, float y);
         bool checkConstraintsCollision(Object*);
 
-        void detectCollisions(uint32_t i, Object* obj, float r_c);
+        void detectCollisionsBruteForce(uint32_t i, Object* obj, float r_c);
+        void detectCollisionsSweetAndPrune();
 
         std::vector<Object*> getWorldObjects() const;
 

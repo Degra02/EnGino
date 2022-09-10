@@ -67,7 +67,7 @@ namespace pheng {
                     worldObjects[i]->Position += (worldObjects[i]->Velocity * dt);
 
                     checkConstraintsCollision(worldObjects[i]);
-                    detectCollisions(i, worldObjects[i], r_f);
+                    //detectCollisionsBruteForce(i, worldObjects[i], r_f);
 
                     worldObjects[i]->Force = {0.f, 0.f}; // Reinitializing the force applied to the Object
                     worldObjects[i]->applyChange();
@@ -75,6 +75,7 @@ namespace pheng {
                     updateEnergy(worldObjects[i]);
                 }
             }
+            detectCollisionsSweetAndPrune();
             updateLegend();
         }
     }
@@ -90,10 +91,19 @@ namespace pheng {
         Legend.setString(s.str());
     }
 
-    void World::detectCollisions(uint32_t i, Object* obj, float r_c) {
-        //std::list<Object*> intersections;
+    void World::detectCollisionsBruteForce(uint32_t i, Object* obj, float r_c) {
         for (uint32_t k(i+1); k < n; ++k){
             pheng::Collisions::objToObj(obj, worldObjects[k], r_c);
+        }
+    }
+
+    void World::detectCollisionsSweetAndPrune() {
+        std::vector<Object*> possibleCollision = SweepAndPrune::getPossibleCollisions(worldObjects);
+
+        for (uint32_t i(0); i < possibleCollision.size(); ++i) {
+            for (uint32_t j(i); j < possibleCollision.size(); ++j){
+                pheng::Collisions::objToObj(worldObjects[i], worldObjects[j], r_c);
+            }
         }
     }
 
@@ -113,11 +123,11 @@ namespace pheng {
         this->isPaused = !isPaused;
     }
 
+
     void World::setConstraints(float x, float y) {
         this->window_constraints[0] = x;
         this->window_constraints[1] = y;
     }
-
 
     bool World::checkConstraintsCollision(Object* obj) {
         obj->constraintsCollision(window_constraints);
@@ -158,12 +168,12 @@ namespace pheng {
         }
     }
 
+
     void World::toggleSpawners() {
         for (auto &spawner: spawners) {
             spawner->toggleSpawning();
         }
     }
-
 
     //Drawing objects
     void World::drawObjects(sf::RenderWindow *window) {
