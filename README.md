@@ -16,6 +16,10 @@ Currently utilizes a restitution coefficient that simulates energy loss during c
 Using [Verlet's integration](https://en.wikipedia.org/wiki/Verlet_integration), the object's position and collision response is approximated, meaning that it's not "accurate" in terms of physics simulation but faster computational times.  
 
 
+## Rendering
+With the *Render* class it's possible to render each frame (framerate is modifiable) and save it in a user-specified directory.  
+Then by using [ffmpeg](https://ffmpeg.org/) a video can be created from the frames rendered.
+
 ## TODO
 -- Calculate correct energy loss at collision.  
 -- Implement [Sweep and Prune](https://en.wikipedia.org/wiki/Sweep_and_prune) algorithm for object collision detection.  
