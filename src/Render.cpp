@@ -1,0 +1,19 @@
+#include "Render.h"
+
+namespace pheng {
+
+    Render::Render(std::string directoryPath, double w, double h) {
+        texture.create(w, h);
+        this->directoryPath = directoryPath;
+    }
+
+    void Render::renderFrame(sf::RenderWindow &window) {
+        texture.update(window);
+        char s[14];
+        sprintf(s, "img_%05d.png", renderNumber);
+        renderNumber++;
+
+        texture.copyToImage().saveToFile(directoryPath + s);
+    }
+
+} // pheng

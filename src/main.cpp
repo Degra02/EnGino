@@ -2,13 +2,14 @@
 #include <cmath>
 #include "../include/World.h"
 #include "../include/VerletSolver.h"
+#include "Render.h"
 
 //Graphics
 #include <SFML/Graphics.hpp>
 
 #define WIDTH 1500
 #define HEIGHT 1000
-#define FPS_LIMIT 30
+#define FPS_LIMIT 60
 #define SUBSTEPS 10 //Accuracy of the simulation
 
 int main() {
@@ -32,14 +33,14 @@ int main() {
 
     pheng::VerletSolver solver(&world);
 
-    world.addSpawner(new pheng::ObjectSpawner({WIDTH/2.f , HEIGHT/3.f}, 1));
-    //world.addSpawner(new pheng::ObjectSpawner({WIDTH/3.f, HEIGHT/3.f}, 5));
+    world.addSpawner(new pheng::ObjectSpawner({WIDTH/2.f , HEIGHT/3.f}, 2));
 
-    /**sf::Texture texture;
-    std::string filename = "/home/degra/Coding/C++/EnGino/Renders/";
-    texture.create(WIDTH, HEIGHT);**/
 
-    int number = 0;
+    //Renderer initialization
+    std::string directoryPath = "/home/degra/Coding/C++/EnGino/Renders/";
+    pheng::Render rendered(directoryPath, WIDTH, HEIGHT);
+
+
     while (window.isOpen()){
         sf::Event event{};
         while (window.pollEvent(event)){
@@ -80,12 +81,7 @@ int main() {
 
         window.display();
 
-        /**
-        texture.update(window);
-        char s[12];
-        sprintf(s, "img_%03d.png", number);
-        texture.copyToImage().saveToFile(filename + s);
-        number++;**/
+        //rendered.renderFrame(window);
     }
 
 }
