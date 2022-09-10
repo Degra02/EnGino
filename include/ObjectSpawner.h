@@ -12,10 +12,12 @@ namespace pheng {
         uint32_t spawnRate;
         uint32_t spawnCounter = 0;
 
+        int* circleRadiusSpan;
+
         bool isSpawning = false;
         inline void toggleSpawning() { isSpawning = !isSpawning;}
 
-        explicit ObjectSpawner(vector2, uint32_t spawnRate);
+        explicit ObjectSpawner(vector2, uint32_t spawnRate, int* circleRadiusSpan);
         Object* spawnObject();
     };
 }

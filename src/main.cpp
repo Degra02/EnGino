@@ -33,8 +33,9 @@ int main() {
 
     pheng::VerletSolver solver(&world);
 
-    world.addSpawner(new pheng::ObjectSpawner({WIDTH/1.5 , HEIGHT/3.f}, 2));
-    world.addSpawner(new pheng::ObjectSpawner({WIDTH/3.f , HEIGHT/3.f}, 2));
+    int radius[2] = {5, 10};
+    world.addSpawner(new pheng::ObjectSpawner({WIDTH/1.5 , HEIGHT/3.f}, 2, radius));
+    world.addSpawner(new pheng::ObjectSpawner({WIDTH/3.f , HEIGHT/3.f}, 2, radius));
 
     //Renderer initialization
     std::string directoryPath = "/home/degra/Coding/C++/EnGino/Renders/";

@@ -63,13 +63,13 @@ namespace pheng {
         this->Force = f;
     }
 
-    void Object::constraintsCollision(double *constraints) {
+    void Object::constraintsCollision(double *constraints, float r_f) {
 
     }
 
     float Object::calculateEnergy(double h, double g) {
         return 0.5 * Mass * Velocity.norm() * Velocity.norm() +
-               Mass * g * (h - Position.getY());
+               Mass * g * (h - Position.getY())/100;
     }
 
 }

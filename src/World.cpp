@@ -66,8 +66,7 @@ namespace pheng {
                     worldObjects[i]->Velocity += (worldObjects[i]->Force / worldObjects[i]->Mass) * dt;
                     worldObjects[i]->Position += (worldObjects[i]->Velocity * dt);
 
-                    checkConstraintsCollision(worldObjects[i]);
-                    //detectCollisionsBruteForce(i, worldObjects[i], r_f);
+                    checkConstraintsCollision(worldObjects[i], r_f);
 
                     worldObjects[i]->Force = {0.f, 0.f}; // Reinitializing the force applied to the Object
                     worldObjects[i]->applyChange();
@@ -91,13 +90,14 @@ namespace pheng {
         Legend.setString(s.str());
     }
 
+    [[deprecated("Replaced by Sweep & Prune")]]
     void World::detectCollisionsBruteForce(uint32_t i, Object* obj, float r_c) {
         for (uint32_t k(i+1); k < n; ++k){
             pheng::Collisions::objToObj(obj, worldObjects[k], r_c);
         }
     }
 
-    void World::detectCollisionsSweetAndPrune() {
+    void World::detectCollisionsSweetAndPrune() const {
         SweepAndPrune::getPossibleCollisions(worldObjects);
     }
 
@@ -123,8 +123,8 @@ namespace pheng {
         this->window_constraints[1] = y;
     }
 
-    bool World::checkConstraintsCollision(Object* obj) {
-        obj->constraintsCollision(window_constraints);
+    bool World::checkConstraintsCollision(Object* obj, float r_f) {
+        obj->constraintsCollision(window_constraints, r_f);
     }
 
     void World::spawnCircle(int x, int y) {

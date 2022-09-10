@@ -28,7 +28,7 @@ namespace pheng {
         vector2 getCenterPos();
 
         void applyChange() override;
-        void constraintsCollision(double constraints[]) override;
+        void constraintsCollision(double constraints[], float r_f) override;
 
         float calculateEnergy(double h, double g) override;
 

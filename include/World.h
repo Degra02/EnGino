@@ -45,10 +45,10 @@ namespace pheng {
         void updateLegend();
 
         void setConstraints(float x, float y);
-        bool checkConstraintsCollision(Object*);
+        bool checkConstraintsCollision(Object*, float);
 
         void detectCollisionsBruteForce(uint32_t i, Object* obj, float r_c);
-        void detectCollisionsSweetAndPrune();
+        void detectCollisionsSweetAndPrune() const;
 
         std::vector<Object*> getWorldObjects() const;
 

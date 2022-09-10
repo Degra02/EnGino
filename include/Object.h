@@ -30,7 +30,7 @@ namespace pheng {
         virtual ~Object();
 
         void applyForce(vector2 force);
-        virtual void constraintsCollision(double constraints[]);
+        virtual void constraintsCollision(double constraints[], float r_f);
 
         // Gets overridden by each subclass
         virtual sf::Drawable& getDrawable();
