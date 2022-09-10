@@ -1,6 +1,8 @@
 # EnGino
 Personal Physics Engine.
 
+![Quick render](render_1.gif)
+
 Currently there are two different implementations of position calculus.  
 It still is a WIP, and will be for a long time.
 
