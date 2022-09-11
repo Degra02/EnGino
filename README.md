@@ -4,7 +4,13 @@ Current state:
 ![Quick render](render_1.gif)
 
 Currently there are two different implementations of position calculus.  
-It still is a WIP, and will be for a long time.
+It still is a WIP, and will be for a long time.  
+
+Features:    
+* ObjectSpawners are configurable in spawn-rate, spawn position and spawned-object size.  
+* Pressing the right mouse button on an object will focus the camera on it.
+* Possibility to Render a simulation.  
+* More to come.  
 
 ## Normal method
 Movement is calculated with normal time law of motion.  
@@ -23,7 +29,7 @@ Then by using [ffmpeg](https://ffmpeg.org/) a video can be created from the fram
 ## TODO
 - [ ] Calculate correct energy loss at collision.  
 - [x] Implement [Sweep and Prune](https://en.wikipedia.org/wiki/Sweep_and_prune) algorithm for object collision detection.  
-Now the engine is able to sustain stable 60-fps in real-time rendering up to 1000 object (before 300 was the limit).   
+Now the engine is able to sustain stable 60-fps in real-time rendering up to 1000 objects (before 300 was the limit).   
 - [ ] Add different object types and the respective object collision.  
 - [ ] Implement total energy level.  
 - [ ] Implement rotational objects and fixed objects.  
