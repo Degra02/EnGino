@@ -36,6 +36,7 @@ namespace pheng {
         virtual sf::Drawable& getDrawable();
 
         virtual double getSize() = 0;
+        virtual vector2 getCenter() = 0;
 
         // Applies change to graphics
         virtual void applyChange();

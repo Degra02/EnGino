@@ -25,6 +25,7 @@ namespace pheng {
 
         double total_energy = 0;
         sf::Text Legend;
+        sf::Text objLegend;
 
         explicit World(const sf::Font& font);
         explicit World(float dt);
@@ -43,6 +44,7 @@ namespace pheng {
 
         void updateEnergy(Object* obj);
         void updateLegend();
+        void updateObjLegend(Object *obj);
 
         void setConstraints(float x, float y);
         bool checkConstraintsCollision(Object*, float);

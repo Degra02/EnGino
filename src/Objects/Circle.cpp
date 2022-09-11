@@ -60,10 +60,14 @@ namespace pheng {
         return getRadius();
     }
 
+    vector2 Circle::getCenter() {
+        return getCenterPos();
+    }
+
+
     void Circle::applyChange() {
         this->circleShape.setPosition({static_cast<float>(this->getCenterPos().getX()), static_cast<float>(this->getCenterPos().getY())});
     }
-
 
     void Circle::constraintsCollision(double *constraints, float r_f) {
 

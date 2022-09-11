@@ -10,7 +10,7 @@
 #define WIDTH 1500
 #define HEIGHT 1000
 #define FPS_LIMIT 60
-#define SUBSTEPS 10 //Accuracy of the simulation
+#define SUBSTEPS 30 //Accuracy of the simulation
 
 int main() {
     srand(time(nullptr));
@@ -23,6 +23,10 @@ int main() {
 
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "EnGino");
     world.setConstraints(WIDTH, HEIGHT);
+    sf::RectangleShape border({WIDTH, HEIGHT});
+    border.setFillColor(sf::Color::Transparent);
+    border.setOutlineColor(sf::Color::White);
+    border.setOutlineThickness(4);
 
     window.setFramerateLimit(FPS_LIMIT);
     float dt = 1.f/FPS_LIMIT;
@@ -31,16 +35,24 @@ int main() {
     // Percentage of velocity kept after each collision
     float restitution_coef = 1;
 
-    pheng::VerletSolver solver(&world);
+    // For Verlet calculus
+    // pheng::VerletSolver solver(&world);
 
-    int radius[2] = {5, 10};
+    //Object spawners
+    int radius[2] = {10, 20};
     world.addSpawner(new pheng::ObjectSpawner({WIDTH/1.5 , HEIGHT/3.f}, 2, radius));
     world.addSpawner(new pheng::ObjectSpawner({WIDTH/3.f , HEIGHT/3.f}, 2, radius));
+
+    //Focus camera
+    sf::View camera({WIDTH/2.f, HEIGHT/2.f}, {WIDTH, HEIGHT});
+    pheng::vector2 cameraCenter = {WIDTH/2.f, HEIGHT/2.f};
+    pheng::Object *focusedObject = nullptr;
+    bool isFocused = false;
+
 
     //Renderer initialization
     std::string directoryPath = "/home/degra/Coding/C++/EnGino/Renders/";
     pheng::Render rendered(directoryPath, WIDTH, HEIGHT);
-
 
     while (window.isOpen()){
         sf::Event event{};
@@ -62,12 +74,35 @@ int main() {
                 case sf::Event::MouseButtonPressed: {
                     if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
                        world.spawnCircle(event.mouseButton.x, event.mouseButton.y);
+                    } else if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+                        if (!isFocused) {
+                            for (auto &obj: world.getWorldObjects()) {
+                                if (pheng::vector2::norm({static_cast<double>(event.mouseButton.x),
+                                                          static_cast<double>(event.mouseButton.y)},
+                                                         obj->getCenter()) < obj->getSize()) {
+                                    focusedObject = obj;
+                                    camera.zoom(0.5);
+                                    isFocused = true;
+                                }
+                            }
+                        } else {
+                            camera.setCenter(WIDTH / 2.f, HEIGHT / 2.f);
+                            camera.zoom(2);
+                            isFocused = false;
+                        }
                     }
                 }
             }
         }
         window.clear();
 
+        if (isFocused) {
+            camera.setCenter(focusedObject->getCenter().getX(), focusedObject->getCenter().getY());
+            world.updateObjLegend(focusedObject);
+        }
+        window.setView(camera);
+
+        window.draw(border);
         world.spawnObjectsSpawner();
 
         for(int i(0); i < SUBSTEPS; ++i) {

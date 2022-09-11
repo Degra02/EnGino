@@ -15,6 +15,11 @@ namespace pheng {
         Legend.setCharacterSize(24);
         Legend.setFillColor(sf::Color::White);
         Legend.setPosition({50, 50});
+
+        objLegend.setFont(font);
+        objLegend.setCharacterSize(24);
+        objLegend.setFillColor(sf::Color::White);
+        objLegend.setPosition({static_cast<float>(window_constraints[0] - 100.f), 50});
     }
 
     World::World(float dt) {
@@ -86,8 +91,14 @@ namespace pheng {
     void World::updateLegend() {
         std::stringstream s;
         s << "Energy: " << std::setprecision(3) << total_energy << std::endl \
-            << "No: " << n;
+            << "No: " << n << std::endl;
         Legend.setString(s.str());
+    }
+
+    void World::updateObjLegend(Object *obj) {
+        std::stringstream s;
+        s << "Velocity: " << std::setprecision(3) << obj->Velocity.norm() << std::endl;
+        objLegend.setString(s.str());
     }
 
     [[deprecated("Replaced by Sweep & Prune")]]
@@ -109,6 +120,7 @@ namespace pheng {
         this->dt = dt;
     }
 
+
     std::vector<Object*> World::getWorldObjects() const {
         return this->worldObjects;
     }
@@ -116,7 +128,6 @@ namespace pheng {
     void World::setPaused() {
         this->isPaused = !isPaused;
     }
-
 
     void World::setConstraints(float x, float y) {
         this->window_constraints[0] = x;
@@ -144,6 +155,7 @@ namespace pheng {
         spawners.push_back(spawner);
     }
 
+
     void World::removeSpawner(ObjectSpawner* spawner) {
         auto itr = std::find(spawners.begin(), spawners.end(), spawner);
         if (itr == spawners.end()) return;
@@ -162,7 +174,6 @@ namespace pheng {
         }
     }
 
-
     void World::toggleSpawners() {
         for (auto &spawner: spawners) {
             spawner->toggleSpawning();
@@ -175,6 +186,7 @@ namespace pheng {
             window->draw(obj->getDrawable());
         }
         window->draw(Legend);
+        window->draw(objLegend);
     }
 } // pheng
 
