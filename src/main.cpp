@@ -1,4 +1,5 @@
 #include <iostream>
+#define _USE_MATH_DEFINES
 #include <cmath>
 #include "../include/World.h"
 #include "../include/VerletSolver.h"
@@ -10,7 +11,8 @@
 #define WIDTH 1500
 #define HEIGHT 1000
 #define FPS_LIMIT 60
-#define SUBSTEPS 30 //Accuracy of the simulation
+#define SUBSTEPS 10 //Accuracy of the simulation
+
 
 int main() {
     srand(time(nullptr));
@@ -66,6 +68,7 @@ int main() {
                         world.setPaused();
                     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)){
                         world.removeAll();
+                        camera.setCenter(WIDTH/2.f, HEIGHT/2.f);
                     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
                         world.toggleSpawners();
                     }
@@ -98,14 +101,18 @@ int main() {
 
         if (isFocused) {
             camera.setCenter(focusedObject->getCenter().getX(), focusedObject->getCenter().getY());
-            world.updateObjLegend(focusedObject);
+            sf::RectangleShape direction({static_cast<float>(focusedObject->Velocity.norm()/7), 3});
+            direction.setPosition(focusedObject->Position.getX(), focusedObject->Position.getY());
+            direction.setRotation(focusedObject->Velocity.angle() * 180 / M_PI);
+            window.draw(direction);
+            world.updateObjLegend(focusedObject, {camera.getCenter().x, camera.getCenter().y});
         }
         window.setView(camera);
 
         window.draw(border);
         world.spawnObjectsSpawner();
 
-        for(int i(0); i < SUBSTEPS; ++i) {
+        for(uint8_t i(0); i < SUBSTEPS; ++i) {
             //Verlet's integration method
             //solver.update(dt_sub); // --> Doesn't take into account the masses of the various objects
 

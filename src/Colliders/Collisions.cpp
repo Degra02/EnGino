@@ -20,8 +20,8 @@ namespace pheng {
             vector2 collisionAxis =( s1->getCenterPos() - s2->getCenterPos()) /
                     vector2::norm(s1->getCenterPos() - s2->getCenterPos()); //Normalized
 
-            s1->Position += collisionAxis*delta*0.5;
-            s2->Position -= collisionAxis*delta*0.5;
+            s1->Position += collisionAxis*delta;
+            s2->Position -= collisionAxis*delta;
 
             vector2 v1i = s1->Velocity, v2i = s2->Velocity;
             double m1 = s1->Mass, m2 = s2->Mass;

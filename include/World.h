@@ -44,7 +44,7 @@ namespace pheng {
 
         void updateEnergy(Object* obj);
         void updateLegend();
-        void updateObjLegend(Object *obj);
+        void updateObjLegend(Object *obj, vector2 offsetCenter);
 
         void setConstraints(float x, float y);
         bool checkConstraintsCollision(Object*, float);

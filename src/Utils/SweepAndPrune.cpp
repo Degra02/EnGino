@@ -5,7 +5,6 @@
 namespace pheng {
 
     void SweepAndPrune::getPossibleCollisions(std::vector<Object*> worldObjects) {
-
         std::sort(worldObjects.begin(), worldObjects.end(), sortByXLeft);
         std::vector<Object*> activeList;
         activeList.push_back(worldObjects[0]);

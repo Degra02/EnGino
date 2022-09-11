@@ -19,7 +19,6 @@ namespace pheng {
         objLegend.setFont(font);
         objLegend.setCharacterSize(24);
         objLegend.setFillColor(sf::Color::White);
-        objLegend.setPosition({static_cast<float>(window_constraints[0] - 100.f), 50});
     }
 
     World::World(float dt) {
@@ -65,6 +64,7 @@ namespace pheng {
     void World::step(double dt, float r_f = 1) {
         if (!isPaused && n > 0) {
             total_energy = 0;
+            detectCollisionsSweetAndPrune();
             for (uint32_t i(0); i < n; ++i) {
                 if (worldObjects[i]->mobility == FREE){
                     worldObjects[i]->Force += (this->gravity * worldObjects[i]->Mass);
@@ -79,7 +79,7 @@ namespace pheng {
                     updateEnergy(worldObjects[i]);
                 }
             }
-            detectCollisionsSweetAndPrune();
+
             updateLegend();
         }
     }
@@ -95,9 +95,10 @@ namespace pheng {
         Legend.setString(s.str());
     }
 
-    void World::updateObjLegend(Object *obj) {
+    void World::updateObjLegend(Object *obj, vector2 offsetCenter) {
         std::stringstream s;
-        s << "Velocity: " << std::setprecision(3) << obj->Velocity.norm() << std::endl;
+        s << "Velocity: " << std::setprecision(3) << obj->Velocity.norm() / 100 << "m/s" << std::endl;
+        objLegend.setPosition(offsetCenter.getX() + 50, offsetCenter.getY());
         objLegend.setString(s.str());
     }
 
