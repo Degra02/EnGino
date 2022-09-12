@@ -32,18 +32,24 @@ namespace pheng {
     void VerletSolver::applyConstraints() { // Circular window_constraints
         pheng::vector2 position{world->window_constraints[0] / 2, world->window_constraints[1] / 2};
         float radius = 400.f;
-        for (auto &obj: world->worldObjects) {
+        /**for (auto &obj: world->worldObjects) {
             pheng::vector2 to_obj = obj->Position - position;
-            double dist = pheng::vector2::norm(to_obj);
+            float dist = pheng::vector2::norm(to_obj);
             if (dist > (radius - dynamic_cast<pheng::Circle*>(obj)->getRadius())) {
                 pheng::vector2 n = to_obj / dist;
                 obj->Position = position + n * (radius - dynamic_cast<pheng::Circle*>(obj)->getRadius());
             }
+        }**/
+
+        for (auto &obj: world->worldObjects) {
+            obj->constraintsCollision(world->window_constraints, 1);
         }
+
     }
 
     void VerletSolver::solveCollisions() {
         const uint32_t obj_count = world->worldObjects.size();
+
         for (uint32_t i(0); i < obj_count; ++i){
             pheng::Object* obj_1 = world->worldObjects.at(i);
             for(uint32_t k(i+1); k < obj_count; ++k){

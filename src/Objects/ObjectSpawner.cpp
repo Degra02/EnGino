@@ -29,7 +29,7 @@ namespace pheng {
             auto* c = new Circle(r, spawnPosition.operator+({static_cast<float>(rand() % (5 + 5 + 1) - 5),
                                                              static_cast<float>(rand() % (5 + 5 + 1) - 5)}), r);
             c->circleShape.setFillColor(sf::Color(red, green, blue));
-            c->circleShape.setOutlineColor(sf::Color(red, green, blue, 50));
+            c->circleShape.setOutlineThickness(0);
 
             spawnCounter = (spawnCounter % spawnRate) + 1;
 

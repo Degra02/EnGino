@@ -7,17 +7,19 @@
 #include "Object.h"
 #include "ObjectSpawner.h"
 #include "SweepAndPrune.h"
-#include "../src/Objects/Cannon.h"
+#include "Cannon.h"
 
 namespace pheng {
 
     class World {
     public:
         uint32_t n = 0; // number of objects currently in the simulation
-        uint32_t n_outside = 0;
+        uint32_t n_outside = 0; // number of objects that exited the screen (they get eliminated)
         float dt; // time intervals between a "system frame" and the next one
         vector2 gravity = vector2(0.0, 981); //negative y-values mean "upward"
         float window_constraints[2];
+        sf::RectangleShape border;
+
         float r_c = 1;
 
         bool isPaused = false;
@@ -30,8 +32,7 @@ namespace pheng {
         sf::Text Legend;
         sf::Text objLegend;
 
-        explicit World(const sf::Font& font);
-        explicit World(float dt);
+        World(const sf::Font& font, int w, int h);
 
         ~World();
         void addObject(Object* obj);

@@ -10,6 +10,6 @@ add_executable(PhysicsEngine src/main.cpp src/World.cpp include/World.h
         src/Colliders/Collisions.cpp include/Collisions.h src/Objects/Circle.cpp include/Circle.h
         src/Utils/VerletSolver.cpp include/VerletSolver.h src/Objects/ObjectSpawner.cpp include/ObjectSpawner.h
         src/Objects/Rectangle.cpp include/Rectangle.h src/Render.cpp include/Render.h
-        src/Utils/SweepAndPrune.cpp include/SweepAndPrune.h include/PairsList.h src/Objects/Cannon.cpp src/Objects/Cannon.h)
+        src/Utils/SweepAndPrune.cpp include/SweepAndPrune.h include/PairsList.h src/Objects/Cannon.cpp include/Cannon.h)
 
 target_link_libraries(PhysicsEngine -lsfml-window -lsfml-graphics -lsfml-system -lsfml-audio)

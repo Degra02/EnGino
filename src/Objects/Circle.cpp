@@ -78,7 +78,7 @@ namespace pheng {
             vector2 collision_axis = (getCenterPos() - second_point) /
                     vector2::norm(getCenterPos(), second_point);
 
-            Position += collision_axis * delta * 0.5;
+            Position += collision_axis * delta;
 
         } else if ( vector2::norm(getCenterPos(), {0, getCenterPos().getY()}) < getRadius()) {
             Velocity.setX(-Velocity.getX() * r_f);
@@ -87,7 +87,7 @@ namespace pheng {
             vector2 collision_axis = (getCenterPos() - second_point) /
                                      vector2::norm(getCenterPos(), second_point);
 
-            Position += collision_axis * delta * 0.5;
+            Position += collision_axis * delta;
         }
         if (vector2::norm(getCenterPos(), {getCenterPos().getX(), constraints[1]}) < getRadius()) {
             Velocity.setY(-Velocity.getY() * r_f);
@@ -96,7 +96,7 @@ namespace pheng {
             vector2 collision_axis = (getCenterPos() - second_point) /
                                      vector2::norm(getCenterPos(), second_point);
 
-            Position += collision_axis * delta * 0.5;
+            Position += collision_axis * delta;
         } else if ( vector2::norm(getCenterPos(), {getCenterPos().getX(), 0}) < getRadius()) {
             Velocity.setY(-Velocity.getY() * r_f);
             float delta = getRadius() - vector2::norm(getCenterPos(), {getCenterPos().getX(), 0});
@@ -104,7 +104,7 @@ namespace pheng {
             vector2 collision_axis = (getCenterPos() - second_point) /
                                      vector2::norm(getCenterPos(), second_point);
 
-            Position += collision_axis * delta * 0.5;
+            Position += collision_axis * delta;
         }
 
     }

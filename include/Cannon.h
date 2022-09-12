@@ -1,9 +1,9 @@
 #ifndef ENGINO_CANNON_H
 #define ENGINO_CANNON_H
 #include <iostream>
-#include "../../include/vector2.h"
-#include "../../include/Object.h"
-#include "../../include/Circle.h"
+#include "vector2.h"
+#include "Object.h"
+#include "Circle.h"
 
 namespace pheng {
     class Cannon {

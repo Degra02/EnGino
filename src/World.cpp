@@ -8,8 +8,10 @@
 
 namespace pheng {
 
-    pheng::World::World(const sf::Font& font) {
+    pheng::World::World(const sf::Font& font, int w, int h) {
         dt = 0;
+
+        setConstraints(w, h);
 
         Legend.setFont(font);
         Legend.setCharacterSize(24);
@@ -19,10 +21,11 @@ namespace pheng {
         objLegend.setFont(font);
         objLegend.setCharacterSize(24);
         objLegend.setFillColor(sf::Color::White);
-    }
 
-    World::World(float dt) {
-        this->dt = dt;
+        sf::RectangleShape border({static_cast<float>(w), static_cast<float>(h)});
+        border.setFillColor(sf::Color::Transparent);
+        border.setOutlineColor(sf::Color::White);
+        border.setOutlineThickness(4);
     }
 
     pheng::World::~World() {
@@ -41,11 +44,19 @@ namespace pheng {
     }
 
     void World::removeObject(Object *obj) {
+        int i;
         if(n > 0){
-            auto itr = std::find(worldObjects.begin(), worldObjects.end(), obj);
+            for(auto it(worldObjects.begin()); it != worldObjects.end(); ++it, ++i) {
+                if (worldObjects[i] == obj) {
+                    auto o = worldObjects[i];
+                    worldObjects.erase(it);
+                    delete o;
+                    n--;
+                }
+            }
+            /**auto itr = std::find(worldObjects.begin(), worldObjects.end(), obj);
             if (itr == worldObjects.end()) return; // This means there's no such object in the world
-            worldObjects.erase(itr);
-            n--;
+            n--;**/
         } else {
             printf("\n No objects in the World");
         }
@@ -64,27 +75,27 @@ namespace pheng {
     void World::step(float dt, float r_c = 1) {
         if (!isPaused && n > 0) {
             total_energy = 0;
-            n_outside = 0;
-            for (uint32_t i(0); i < n; ++i) {
-                if (worldObjects[i]->mobility == FREE){
-                    worldObjects[i]->Force += (this->gravity * worldObjects[i]->Mass);
-                    worldObjects[i]->Velocity += (worldObjects[i]->Force / worldObjects[i]->Mass) * dt;
-                    worldObjects[i]->Position += (worldObjects[i]->Velocity * dt);
-                    checkConstraintsCollision(worldObjects[i], r_c);
+            for (auto &obj: worldObjects){
+                if (obj->mobility == FREE){
+                    obj->Force += (this->gravity * obj->Mass);
+                    obj->Velocity += (obj->Force / obj->Mass) * dt;
+                    obj->Position += (obj->Velocity * dt);
+                    checkConstraintsCollision(obj, r_c);
 
-                    if (worldObjects[i]->Position.getX() < 0 || worldObjects[i]->Position.getX() > window_constraints[0] ||
-                        worldObjects[i]->Position.getY() < 0 || worldObjects[i]->Position.getY() > window_constraints[1]) {
+                    if (obj->Position.getX() < 0 || obj->Position.getX() > window_constraints[0] ||
+                            obj->Position.getY() < 0 || obj->Position.getY() > window_constraints[1]) {
                         n_outside++;
+                        removeObject(obj);
+                    } else {
+                        obj->Force = {0.f, 0.f}; // Reinitializing the force applied to the Object
+                        obj->applyChange();
+
+                        updateEnergy(obj);
+                        obj->changeColorVelocity();
                     }
-
-                    worldObjects[i]->Force = {0.f, 0.f}; // Reinitializing the force applied to the Object
-                    worldObjects[i]->applyChange();
-
-                    updateEnergy(worldObjects[i]);
-                    worldObjects[i]->changeColorVelocity();
                 }
             }
-            SweepAndPrune::getPossibleCollisions(worldObjects, r_c);
+            SweepAndPrune::calculateCollisions(worldObjects, r_c);
             updateLegend();
         }
     }
@@ -202,6 +213,7 @@ namespace pheng {
 
     //Drawing objects
     void World::drawObjects(sf::RenderWindow *window) {
+        window->draw(border);
         for (auto &obj: worldObjects) {
             window->draw(obj->getDrawable());
         }

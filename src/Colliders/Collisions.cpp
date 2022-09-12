@@ -27,11 +27,11 @@ namespace pheng {
             float m1 = s1->Mass, m2 = s2->Mass;
             vector2 v1f = v1i -  (s1->getCenterPos() - s2->getCenterPos()) * (2*m2/(m1 + m2)) *
                     ((vector2::dotProduct(v1i - v2i, s1->getCenterPos() - s2->getCenterPos())) /
-                    pow((s1->getCenterPos() - s2->getCenterPos()).norm(), 2));
+                            static_cast<float>(pow((s1->getCenterPos() - s2->getCenterPos()).norm(), 2)));
 
             vector2 v2f = v2i - (s2->getCenterPos() - s1->getCenterPos()) * (2*m1/(m1 + m2)) *
                                 ((vector2::dotProduct(v2i - v1i, s2->getCenterPos() - s1->getCenterPos())) /
-                                pow((s2->getCenterPos() - s1->getCenterPos()).norm(), 2));
+                                static_cast<float>(pow((s2->getCenterPos() - s1->getCenterPos()).norm(), 2)));
 
             s1->Velocity = v1f * restitution_coef;
             s2->Velocity = v2f * restitution_coef;
