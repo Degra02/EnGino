@@ -11,7 +11,7 @@
 #define WIDTH 1500
 #define HEIGHT 1000
 #define FPS_LIMIT 60
-#define SUBSTEPS 10 //Accuracy of the simulation
+#define SUBSTEPS 100 //Accuracy of the simulation
 
 
 int main() {
@@ -35,24 +35,27 @@ int main() {
     float dt_sub = dt / SUBSTEPS;
 
     // Percentage of velocity kept after each collision
-    float restitution_coef = 1;
+    float restitution_coef = 0.90;
 
     // For Verlet calculus
     // pheng::VerletSolver solver(&world);
 
     //Object spawners
-    int radius[2] = {10, 20};
-    world.addSpawner(new pheng::ObjectSpawner({WIDTH/1.5 , HEIGHT/3.f}, 2, radius));
-    world.addSpawner(new pheng::ObjectSpawner({WIDTH/3.f , HEIGHT/3.f}, 2, radius));
+    int radius[2] = {3, 3};
+    world.addSpawner(new pheng::ObjectSpawner({WIDTH/1.5 , HEIGHT/3.f}, 1, radius));
+    world.addSpawner(new pheng::ObjectSpawner({WIDTH/3.f , HEIGHT/3.f}, 1, radius));
+    world.addSpawner(new pheng::ObjectSpawner({WIDTH/2.f , HEIGHT/3.f}, 1, radius));
+
+    pheng::vector2 velocity = pheng::vector2::fromNormAngle(1000, -50);
+    world.addCannon(new pheng::Cannon({100, 100}, radius, velocity));
 
     //Focus camera
     sf::View camera({WIDTH/2.f, HEIGHT/2.f}, {WIDTH, HEIGHT});
     pheng::Object *focusedObject = nullptr;
     bool isFocused = false;
 
-
     //Renderer initialization
-    std::string directoryPath = "/home/degra/Coding/C++/EnGino/Renders/";
+    std::string directoryPath = "/tmp/engino/";
     pheng::Render rendered(directoryPath, WIDTH, HEIGHT);
 
     while (window.isOpen()){
@@ -70,6 +73,8 @@ int main() {
                         camera.setCenter(WIDTH/2.f, HEIGHT/2.f);
                     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
                         world.toggleSpawners();
+                    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
+                        world.toggleCannons();
                     }
                 }
 

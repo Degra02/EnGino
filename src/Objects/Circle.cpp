@@ -113,6 +113,10 @@ namespace pheng {
         return Object::calculateEnergy(h - getRadius(), g);
     }
 
+    void Circle::changeColorVelocity() {
+    }
+
+
     //Verlet integration
     void Circle::updatePositionVerlet(float dt) {
         vector2 velocity = Position - Old_Position;

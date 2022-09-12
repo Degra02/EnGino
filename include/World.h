@@ -7,6 +7,7 @@
 #include "Object.h"
 #include "ObjectSpawner.h"
 #include "SweepAndPrune.h"
+#include "../src/Objects/Cannon.h"
 
 namespace pheng {
 
@@ -22,6 +23,7 @@ namespace pheng {
 
         std::vector<Object*> worldObjects;
         std::vector<ObjectSpawner*> spawners;
+        std::vector<Cannon*> cannons;
 
         float total_energy = 0;
         sf::Text Legend;
@@ -61,6 +63,10 @@ namespace pheng {
         void removeSpawner(ObjectSpawner *spawner);
         void spawnObjectsSpawner();
         void toggleSpawners();
+
+        void addCannon(Cannon* cannon);
+        void removeCannon(Cannon* cannon);
+        void toggleCannons();
 
         void spawnCircle(int x, int y);
     };

@@ -10,7 +10,7 @@ namespace pheng {
     void Render::renderFrame(sf::RenderWindow &window) {
         texture.update(window);
         char s[14];
-        sprintf(s, "img_%05d.png", renderNumber);
+        sprintf(s, "img_%05d.bmp", renderNumber);
         renderNumber++;
 
         texture.copyToImage().saveToFile(directoryPath + s);

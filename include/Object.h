@@ -56,6 +56,8 @@ namespace pheng {
         virtual void accelerate(vector2 acceleration) = 0;
 
         virtual float calculateEnergy(float h, float g);
+
+        virtual void changeColorVelocity() = 0;
     };
 }
 

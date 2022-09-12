@@ -76,6 +76,7 @@ namespace pheng {
                     worldObjects[i]->applyChange();
 
                     updateEnergy(worldObjects[i]);
+                    worldObjects[i]->changeColorVelocity();
                 }
             }
             SweepAndPrune::getPossibleCollisions(worldObjects, r_c);
@@ -172,6 +173,24 @@ namespace pheng {
     void World::toggleSpawners() {
         for (auto &spawner: spawners) {
             spawner->toggleSpawning();
+        }
+    }
+
+    void World::addCannon(Cannon* cannon) {
+        cannons.push_back(cannon);
+    }
+
+    void World::removeCannon(Cannon* cannon) {
+        auto itr = std::find(cannons.begin(), cannons.end(), cannon);
+        if (itr == cannons.end()) return;
+        cannons.erase(itr);
+    }
+
+    void World::toggleCannons() {
+        if (!isPaused) {
+            for (auto &cannon: cannons){
+                addObject(cannon->shootObject());
+            }
         }
     }
 

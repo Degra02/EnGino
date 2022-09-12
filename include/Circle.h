@@ -33,6 +33,7 @@ namespace pheng {
 
         float calculateEnergy(float h, float g) override;
 
+        void changeColorVelocity() override;
 
         //Verlet integration
         void updatePositionVerlet(float dt) override;
