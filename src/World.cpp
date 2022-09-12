@@ -61,17 +61,16 @@ namespace pheng {
         updateLegend();
     }
 
-    void World::step(double dt, float r_f = 1) {
+    void World::step(float dt, float r_c = 1) {
         if (!isPaused && n > 0) {
             total_energy = 0;
-            detectCollisionsSweetAndPrune();
             for (uint32_t i(0); i < n; ++i) {
                 if (worldObjects[i]->mobility == FREE){
                     worldObjects[i]->Force += (this->gravity * worldObjects[i]->Mass);
                     worldObjects[i]->Velocity += (worldObjects[i]->Force / worldObjects[i]->Mass) * dt;
                     worldObjects[i]->Position += (worldObjects[i]->Velocity * dt);
 
-                    checkConstraintsCollision(worldObjects[i], r_f);
+                    checkConstraintsCollision(worldObjects[i], r_c);
 
                     worldObjects[i]->Force = {0.f, 0.f}; // Reinitializing the force applied to the Object
                     worldObjects[i]->applyChange();
@@ -79,7 +78,7 @@ namespace pheng {
                     updateEnergy(worldObjects[i]);
                 }
             }
-
+            SweepAndPrune::getPossibleCollisions(worldObjects, r_c);
             updateLegend();
         }
     }
@@ -109,10 +108,6 @@ namespace pheng {
         }
     }
 
-    void World::detectCollisionsSweetAndPrune() const {
-        SweepAndPrune::getPossibleCollisions(worldObjects);
-    }
-
     void World::setGravity(vector2 value) {
         this->gravity = value;
     }
@@ -140,10 +135,9 @@ namespace pheng {
     }
 
     void World::spawnCircle(int x, int y) {
-        double r = rand() % (50 - 10 + 1) + 10;
+        float r = rand() % (50 - 10 + 1) + 10;
 
-        auto* c = new pheng::Circle(r, {static_cast<double>(x),
-                                         static_cast<double>(y)}, r);
+        auto* c = new pheng::Circle(r, {static_cast<float>(x), static_cast<float>(y)}, r);
         //c->setVelocity({static_cast<float>(rand() % 100), static_cast<float>(rand() % 100)});
 
         //For Verlet's method

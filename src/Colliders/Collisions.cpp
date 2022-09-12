@@ -13,9 +13,9 @@ namespace pheng {
         return false;
     }
 
-    bool Collisions::circleToCircle(Circle* s1, Circle* s2, double restitution_coef) {
+    bool Collisions::circleToCircle(Circle* s1, Circle* s2, float restitution_coef) {
         if ( vector2::norm(s1->getCenterPos(), s2->getCenterPos()) <= (s1->getRadius() + s2->getRadius())){
-            double delta = (s1->getRadius() + s2->getRadius()) -
+            float delta = (s1->getRadius() + s2->getRadius()) -
                             vector2::norm(s1->getCenterPos(), s2->getCenterPos());
             vector2 collisionAxis =( s1->getCenterPos() - s2->getCenterPos()) /
                     vector2::norm(s1->getCenterPos() - s2->getCenterPos()); //Normalized
@@ -24,7 +24,7 @@ namespace pheng {
             s2->Position -= collisionAxis*delta;
 
             vector2 v1i = s1->Velocity, v2i = s2->Velocity;
-            double m1 = s1->Mass, m2 = s2->Mass;
+            float m1 = s1->Mass, m2 = s2->Mass;
             vector2 v1f = v1i -  (s1->getCenterPos() - s2->getCenterPos()) * (2*m2/(m1 + m2)) *
                     ((vector2::dotProduct(v1i - v2i, s1->getCenterPos() - s2->getCenterPos())) /
                     pow((s1->getCenterPos() - s2->getCenterPos()).norm(), 2));

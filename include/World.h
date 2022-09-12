@@ -13,9 +13,9 @@ namespace pheng {
     class World {
     public:
         uint32_t n = 0; // number of objects currently in the simulation
-        double dt; // time intervals between a "system frame" and the next one
+        float dt; // time intervals between a "system frame" and the next one
         vector2 gravity = vector2(0.0, 981); //negative y-values mean "upward"
-        double window_constraints[2];
+        float window_constraints[2];
         float r_c = 1;
 
         bool isPaused = false;
@@ -23,7 +23,7 @@ namespace pheng {
         std::vector<Object*> worldObjects;
         std::vector<ObjectSpawner*> spawners;
 
-        double total_energy = 0;
+        float total_energy = 0;
         sf::Text Legend;
         sf::Text objLegend;
 
@@ -36,7 +36,7 @@ namespace pheng {
         void removeObject(Object* obj);
         void removeAll();
 
-        void step(double dt, float r_f);
+        void step(float dt, float r_c);
         void setGravity(vector2 value);
         void setDt(float dt);
 
@@ -50,7 +50,6 @@ namespace pheng {
         bool checkConstraintsCollision(Object*, float);
 
         void detectCollisionsBruteForce(uint32_t i, Object* obj, float r_c);
-        void detectCollisionsSweetAndPrune() const;
 
         std::vector<Object*> getWorldObjects() const;
 

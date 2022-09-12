@@ -11,14 +11,25 @@ namespace pheng {
 
     Object* ObjectSpawner::spawnObject() {
         if (spawnCounter % spawnRate == 0) {
-            red = rand() % 255;
-            green = rand() % 255;
-            blue = rand() % 255;
-            double r = rand() % (circleRadiusSpan[1] - circleRadiusSpan[0] + 1) + circleRadiusSpan[0];
-            auto* c = new Circle(r, spawnPosition.operator+({static_cast<double>(rand() % (5 + 5 + 1) - 5),
-                                                             static_cast<double>(rand() % (5 + 5 + 1) - 5)}), r);
+            iter = (iter % 3);
+            switch (iter) {
+                case 0: {
+                    red = (red % 255) + 10;
+                }
+                case 1: {
+                    green = (green % 255) + 10;
+                }
+                case 2: {
+                    blue = (blue % 255) + 10;
+                }
+            }
+            iter++;
+
+            float r = rand() % (circleRadiusSpan[1] - circleRadiusSpan[0] + 1) + circleRadiusSpan[0];
+            auto* c = new Circle(r, spawnPosition.operator+({static_cast<float>(rand() % (5 + 5 + 1) - 5),
+                                                             static_cast<float>(rand() % (5 + 5 + 1) - 5)}), r);
             c->circleShape.setFillColor(sf::Color(red, green, blue));
-            c->circleShape.setOutlineColor(sf::Color(red, green, blue));
+            c->circleShape.setOutlineColor(sf::Color(red, green, blue, 50));
 
             spawnCounter = (spawnCounter % spawnRate) + 1;
 

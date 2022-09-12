@@ -13,7 +13,7 @@ namespace pheng {
         std::string directoryPath;
 
     public:
-        Render(std::string directoryPath, double w, double h);
+        Render(std::string directoryPath, float w, float h);
 
         void renderFrame(sf::RenderWindow &window);
     };

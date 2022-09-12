@@ -4,37 +4,37 @@
 namespace pheng{
 
     class vector2 {
-        double x;
-        double y;
+        float x;
+        float y;
 
     public:
         vector2();
-        vector2(double x, double y);
+        vector2(float x, float y);
 
-        void setX(double);
-        void setY(double);
-        double getX();
-        double getY();
+        void setX(float);
+        void setY(float);
+        float getX() const;
+        float getY() const;
 
-        vector2 operator +(vector2 v2); // algebraic sum
-        vector2 operator -(vector2 v2);
+        vector2 operator +(vector2 v2) const; // algebraic sum
+        vector2 operator -(vector2 v2) const;
         void operator +=(vector2 v2);
         void operator -=(vector2 v2);
-        vector2 operator *(double m);
-        vector2 operator /(double m);
+        vector2 operator *(float m) const;
+        vector2 operator /(float m) const;
 
-        static double dotProduct(vector2 v1, vector2 v2);
+        static float dotProduct(vector2 v1, vector2 v2);
 
-        double angle();
-        static double angle(vector2);
-        static double angleBetween(vector2, vector2);
+        float angle() const;
+        static float angle(vector2);
+        static float angleBetween(vector2, vector2);
 
         static pheng::vector2 twoPoints(vector2 p1, vector2 p2);
-        static pheng::vector2 fromNormAngle(double norm, double angle);
+        static pheng::vector2 fromNormAngle(float norm, float angle);
 
-        double norm();
-        static double norm(vector2 v);
-        static double norm(vector2 v1, vector2 v2);
+        float norm() const;
+        static float norm(vector2 v);
+        static float norm(vector2 v1, vector2 v2);
     };
 }
 

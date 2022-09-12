@@ -2,7 +2,7 @@
 
 namespace pheng {
 
-    Render::Render(std::string directoryPath, double w, double h) {
+    Render::Render(std::string directoryPath, float w, float h) {
         texture.create(w, h);
         this->directoryPath = directoryPath;
     }

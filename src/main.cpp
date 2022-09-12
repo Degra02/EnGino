@@ -1,6 +1,6 @@
 #include <iostream>
-#define _USE_MATH_DEFINES
 #include <cmath>
+
 #include "../include/World.h"
 #include "../include/VerletSolver.h"
 #include "../include/Render.h"
@@ -47,7 +47,6 @@ int main() {
 
     //Focus camera
     sf::View camera({WIDTH/2.f, HEIGHT/2.f}, {WIDTH, HEIGHT});
-    pheng::vector2 cameraCenter = {WIDTH/2.f, HEIGHT/2.f};
     pheng::Object *focusedObject = nullptr;
     bool isFocused = false;
 
@@ -80,8 +79,8 @@ int main() {
                     } else if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
                         if (!isFocused) {
                             for (auto &obj: world.getWorldObjects()) {
-                                if (pheng::vector2::norm({static_cast<double>(event.mouseButton.x),
-                                                          static_cast<double>(event.mouseButton.y)},
+                                if (pheng::vector2::norm({static_cast<float >(event.mouseButton.x),
+                                                          static_cast<float >(event.mouseButton.y)},
                                                          obj->getCenter()) < obj->getSize()) {
                                     focusedObject = obj;
                                     camera.zoom(0.5);
@@ -103,7 +102,7 @@ int main() {
             camera.setCenter(focusedObject->getCenter().getX(), focusedObject->getCenter().getY());
             sf::RectangleShape direction({static_cast<float>(focusedObject->Velocity.norm()/7), 3});
             direction.setPosition(focusedObject->Position.getX(), focusedObject->Position.getY());
-            direction.setRotation(focusedObject->Velocity.angle() * 180 / M_PI);
+            direction.setRotation(static_cast<float>(focusedObject->Velocity.angle() * (180.f / M_PI)));
             window.draw(direction);
             world.updateObjLegend(focusedObject, {camera.getCenter().x, camera.getCenter().y});
         }

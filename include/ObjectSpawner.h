@@ -11,6 +11,7 @@ namespace pheng {
         uint32_t red = 0, green = 0, blue = 0;
         uint32_t spawnRate;
         uint32_t spawnCounter = 0;
+        uint8_t iter = 0;
 
         int* circleRadiusSpan;
 

@@ -8,34 +8,34 @@ namespace pheng {
 
     class Circle : public Object{
     public:
-        double r;
+        float r;
         //this->Position = center position
         sf::CircleShape circleShape = sf::CircleShape(r);
 
         Circle();
-        Circle(double , vector2, double );
-        Circle(double , vector2, double , Mobility);
+        Circle(float , vector2, float );
+        Circle(float , vector2, float , Mobility);
         ~Circle() override;
 
         void initDrawable();
         sf::Drawable& getDrawable() override;
 
-        double getSize() override;
+        float getSize() override;
         vector2 getCenter() override;
 
         void setRadius(float);
         void setCenterPos(vector2);
-        double getRadius() const;
+        float getRadius() const;
         vector2 getCenterPos();
 
         void applyChange() override;
-        void constraintsCollision(double constraints[], float r_f) override;
+        void constraintsCollision(float constraints[], float r_f) override;
 
-        float calculateEnergy(double h, double g) override;
+        float calculateEnergy(float h, float g) override;
 
 
         //Verlet integration
-        void updatePositionVerlet(double dt) override;
+        void updatePositionVerlet(float dt) override;
         void accelerate(vector2 acceleration) override;
     };
 

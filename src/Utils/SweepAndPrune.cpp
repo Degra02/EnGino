@@ -4,7 +4,7 @@
 
 namespace pheng {
 
-    void SweepAndPrune::getPossibleCollisions(std::vector<Object*> worldObjects) {
+    void SweepAndPrune::getPossibleCollisions(std::vector<Object*> worldObjects, float r_c) {
         std::sort(worldObjects.begin(), worldObjects.end(), sortByXLeft);
         std::vector<Object*> activeList;
         activeList.push_back(worldObjects[0]);
@@ -24,12 +24,12 @@ namespace pheng {
         }
 
         for (auto &pair: pairsList.pairs) {
-            pheng::Collisions::objToObj(pair.o1, pair.o2, 1);
+            pheng::Collisions::objToObj(pair.o1, pair.o2, r_c);
         }
     }
 
     bool SweepAndPrune::sortByXLeft(Object* o1, Object* o2) {
-        return (o1->Position.getX() < o2->Position.getX());
+        return (o1->Position.getX() <= o2->Position.getX());
     }
 
 

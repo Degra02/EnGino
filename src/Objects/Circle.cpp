@@ -7,14 +7,14 @@ namespace pheng {
         initDrawable();
     }
 
-    Circle::Circle(double r, vector2 centerPos, double mass) {
+    Circle::Circle(float r, vector2 centerPos, float mass) {
         this->r = r;
         setPosition(centerPos);
         setMass(mass);
         initDrawable();
     }
 
-    Circle::Circle(double r, vector2 centerPos, double mass, Mobility mobility) {
+    Circle::Circle(float r, vector2 centerPos, float mass, Mobility mobility) {
         this->r = r;
         setPosition(centerPos);
         setMass(mass);
@@ -44,7 +44,7 @@ namespace pheng {
         this->Position = centerPos;
     }
 
-    double Circle::getRadius() const {
+    float Circle::getRadius() const {
         return this->r;
     }
 
@@ -56,7 +56,7 @@ namespace pheng {
         return circleShape;
     }
 
-    double Circle::getSize() {
+    float Circle::getSize() {
         return getRadius();
     }
 
@@ -69,11 +69,11 @@ namespace pheng {
         this->circleShape.setPosition({static_cast<float>(this->getCenterPos().getX()), static_cast<float>(this->getCenterPos().getY())});
     }
 
-    void Circle::constraintsCollision(double *constraints, float r_f) {
+    void Circle::constraintsCollision(float *constraints, float r_f) {
 
         if (vector2::norm(getCenterPos(), {constraints[0], getCenterPos().getY()}) < getRadius()) {
             Velocity.setX(-Velocity.getX() * r_f);
-            double delta = getRadius() - vector2::norm(getCenterPos(), {constraints[0], getCenterPos().getY()});
+            float delta = getRadius() - vector2::norm(getCenterPos(), {constraints[0], getCenterPos().getY()});
             vector2 second_point = {constraints[0], getCenterPos().getY()};
             vector2 collision_axis = (getCenterPos() - second_point) /
                     vector2::norm(getCenterPos(), second_point);
@@ -82,7 +82,7 @@ namespace pheng {
 
         } else if ( vector2::norm(getCenterPos(), {0, getCenterPos().getY()}) < getRadius()) {
             Velocity.setX(-Velocity.getX() * r_f);
-            double delta = getRadius() - vector2::norm(getCenterPos(), {0, getCenterPos().getY()});
+            float delta = getRadius() - vector2::norm(getCenterPos(), {0, getCenterPos().getY()});
             vector2 second_point = {0, getCenterPos().getY()};
             vector2 collision_axis = (getCenterPos() - second_point) /
                                      vector2::norm(getCenterPos(), second_point);
@@ -91,7 +91,7 @@ namespace pheng {
         }
         if (vector2::norm(getCenterPos(), {getCenterPos().getX(), constraints[1]}) < getRadius()) {
             Velocity.setY(-Velocity.getY() * r_f);
-            double delta = getRadius() - vector2::norm(getCenterPos(), {getCenterPos().getX(), constraints[1]});
+            float delta = getRadius() - vector2::norm(getCenterPos(), {getCenterPos().getX(), constraints[1]});
             vector2 second_point ={getCenterPos().getX(), constraints[1]};
             vector2 collision_axis = (getCenterPos() - second_point) /
                                      vector2::norm(getCenterPos(), second_point);
@@ -99,7 +99,7 @@ namespace pheng {
             Position += collision_axis * delta * 0.5;
         } else if ( vector2::norm(getCenterPos(), {getCenterPos().getX(), 0}) < getRadius()) {
             Velocity.setY(-Velocity.getY() * r_f);
-            double delta = getRadius() - vector2::norm(getCenterPos(), {getCenterPos().getX(), 0});
+            float delta = getRadius() - vector2::norm(getCenterPos(), {getCenterPos().getX(), 0});
             vector2 second_point ={getCenterPos().getX(), 0};
             vector2 collision_axis = (getCenterPos() - second_point) /
                                      vector2::norm(getCenterPos(), second_point);
@@ -109,12 +109,12 @@ namespace pheng {
 
     }
 
-    float Circle::calculateEnergy(double h, double g) {
+    float Circle::calculateEnergy(float h, float g) {
         return Object::calculateEnergy(h - getRadius(), g);
     }
 
     //Verlet integration
-    void Circle::updatePositionVerlet(double dt) {
+    void Circle::updatePositionVerlet(float dt) {
         vector2 velocity = Position - Old_Position;
         Old_Position = Position;
 
