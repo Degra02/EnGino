@@ -64,13 +64,18 @@ namespace pheng {
     void World::step(float dt, float r_c = 1) {
         if (!isPaused && n > 0) {
             total_energy = 0;
+            n_outside = 0;
             for (uint32_t i(0); i < n; ++i) {
                 if (worldObjects[i]->mobility == FREE){
                     worldObjects[i]->Force += (this->gravity * worldObjects[i]->Mass);
                     worldObjects[i]->Velocity += (worldObjects[i]->Force / worldObjects[i]->Mass) * dt;
                     worldObjects[i]->Position += (worldObjects[i]->Velocity * dt);
-
                     checkConstraintsCollision(worldObjects[i], r_c);
+
+                    if (worldObjects[i]->Position.getX() < 0 || worldObjects[i]->Position.getX() > window_constraints[0] ||
+                        worldObjects[i]->Position.getY() < 0 || worldObjects[i]->Position.getY() > window_constraints[1]) {
+                        n_outside++;
+                    }
 
                     worldObjects[i]->Force = {0.f, 0.f}; // Reinitializing the force applied to the Object
                     worldObjects[i]->applyChange();
@@ -91,7 +96,8 @@ namespace pheng {
     void World::updateLegend() {
         std::stringstream s;
         s << "Energy: " << std::setprecision(3) << total_energy << std::endl \
-            << "No: " << n << std::endl;
+            << "No: " << n << std::endl \
+            << "No outside: " << n_outside << std::endl;
         Legend.setString(s.str());
     }
 

@@ -14,6 +14,7 @@ namespace pheng {
     class World {
     public:
         uint32_t n = 0; // number of objects currently in the simulation
+        uint32_t n_outside = 0;
         float dt; // time intervals between a "system frame" and the next one
         vector2 gravity = vector2(0.0, 981); //negative y-values mean "upward"
         float window_constraints[2];

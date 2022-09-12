@@ -11,7 +11,7 @@
 #define WIDTH 1500
 #define HEIGHT 1000
 #define FPS_LIMIT 60
-#define SUBSTEPS 100 //Accuracy of the simulation
+#define SUBSTEPS 10 //Accuracy of the simulation
 
 
 int main() {
