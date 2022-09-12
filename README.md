@@ -12,6 +12,14 @@ Features:
 * Possibility to Render a simulation.  
 * More to come.  
 
+Thanks to [topongo](https://github.com/topongo), in order to Render a simulation it's only necessary to change the "render directory"
+in *main.cpp* and in *script.py* and run the script with
+```bash
+python3 script.py 
+```
+in the project directory.
+
+
 ## Normal method
 Movement is calculated with normal time law of motion.  
 Collision response utilizes the correct equations, meaning that it simulates as good as possible the correct directions and modules of velocity of the objects colliding.  
