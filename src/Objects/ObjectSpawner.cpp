@@ -26,7 +26,7 @@ namespace pheng {
             iter++;
 
             float r = rand() % (circleRadiusSpan[1] - circleRadiusSpan[0] + 1) + circleRadiusSpan[0];
-            auto* c = new Circle(r, spawnPosition.operator+({static_cast<float>(rand() % (5 + 5 + 1) - 5),
+            Circle* c = new Circle(r, spawnPosition.operator+({static_cast<float>(rand() % (5 + 5 + 1) - 5),
                                                              static_cast<float>(rand() % (5 + 5 + 1) - 5)}), r);
             c->circleShape.setFillColor(sf::Color(red, green, blue));
             c->circleShape.setOutlineThickness(0);

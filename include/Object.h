@@ -27,7 +27,7 @@ namespace pheng {
         Object();
         Object(vector2 pos, vector2 v, vector2 a, vector2 f, float m, Mobility mobility);
         Object(vector2 pos, vector2 v, vector2 a, vector2 f, float m, float st_frict, float dn_frict);
-        virtual ~Object();
+        ~Object();
 
         void applyForce(vector2 force);
         virtual void constraintsCollision(float constraints[], float r_f);

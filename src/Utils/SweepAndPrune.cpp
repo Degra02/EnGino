@@ -10,8 +10,8 @@ namespace pheng {
 
         pheng::PairsList<Object*> pairsList;
 
-        for(uint32_t i(1); i < worldObjects.size(); ++i){
-            for (uint32_t j(0); j < activeList.size(); ++j) {
+        for(int i(1); i < worldObjects.size(); ++i){
+            for (int j(0); j < activeList.size(); ++j) {
                 if (worldObjects[i]->Position.getX() - worldObjects[i]->getSize() <
                         activeList[j]->Position.getX() + activeList[j]->getSize()) {
                     pairsList.addPair(worldObjects[i], activeList[j]);
@@ -28,7 +28,7 @@ namespace pheng {
     }
 
     bool SweepAndPrune::sortByXLeft(Object* o1, Object* o2) {
-        return (o1->Position.getX() <= o2->Position.getX());
+        return (o1->Position.getX() < o2->Position.getX());
     }
 
     PairsList<Object *> *SweepAndPrune::getPossibleCollisions(std::vector<Object *> worldObjects, float r_c) {

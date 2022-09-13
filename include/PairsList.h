@@ -1,6 +1,7 @@
 #ifndef PHYSICSENGINE_PAIRSLIST_H
 #define PHYSICSENGINE_PAIRSLIST_H
 
+#include <iostream>
 #include <vector>
 #include "Object.h"
 
@@ -11,7 +12,9 @@ namespace pheng {
         T o1;
         T o2;
 
+    public:
         Pair<T>(T _o1, T _o2) {o1 = _o1; o2 = _o2;}
+        //~Pair();
     };
 
     template<typename T>

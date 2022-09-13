@@ -15,7 +15,7 @@ namespace pheng {
         Circle();
         Circle(float , vector2, float );
         Circle(float , vector2, float , Mobility);
-        ~Circle() override;
+        ~Circle();
 
         void initDrawable();
         sf::Drawable& getDrawable() override;
