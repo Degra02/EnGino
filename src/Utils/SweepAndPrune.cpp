@@ -28,7 +28,7 @@ namespace pheng {
     }
 
     bool SweepAndPrune::sortByXLeft(Object* o1, Object* o2) {
-        return (o1->Position.getX() < o2->Position.getX());
+        return (o1->Position.getX() <  o2->Position.getX());
     }
 
     PairsList<Object *> *SweepAndPrune::getPossibleCollisions(std::vector<Object *> worldObjects, float r_c) {
