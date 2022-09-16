@@ -121,7 +121,7 @@ int main() {
 
         window.display();
 
-        rendered.renderFrame(window);
+        //rendered.renderFrame(window);
     }
 
 }

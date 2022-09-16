@@ -14,6 +14,12 @@ namespace pheng {
         Rectangle();
         Rectangle(float b, float h);
 
+        void initDrawable();
+        sf::Drawable& getDrawable() override;
+
+        vector2 getCenter() override;
+        void applyChange() override;
+
     };
 
 } // pheng
