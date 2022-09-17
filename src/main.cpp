@@ -29,13 +29,13 @@ int main() {
     float dt_sub = dt / SUBSTEPS;
 
     // Percentage of velocity kept after each collision
-    float restitution_coef = 0.95;
+    float restitution_coef = 0.995;
 
     // For Verlet calculus
     pheng::VerletSolver solver(&world);
 
     //Object spawners
-    int radius[2] = {10, 10};
+    int radius[2] = {20, 20};
     world.addSpawner(new pheng::ObjectSpawner({WIDTH/1.5 , HEIGHT/3.f}, 1, radius));
     world.addSpawner(new pheng::ObjectSpawner({WIDTH/3.f , HEIGHT/3.f}, 1, radius));
     world.addSpawner(new pheng::ObjectSpawner({WIDTH/2.f , HEIGHT/3.f}, 1, radius));

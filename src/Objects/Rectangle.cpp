@@ -1,7 +1,3 @@
-//
-// Created by degra on 9/9/22.
-//
-
 #include "../../include/Rectangle.h"
 
 namespace pheng {

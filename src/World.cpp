@@ -79,13 +79,15 @@ namespace pheng {
                 if (obj->mobility == FREE){
                     obj->Force += (this->gravity * obj->Mass);
                     obj->Velocity += (obj->Force / obj->Mass) * dt;
-                    obj->Position += (obj->Velocity * dt);
+                    if (obj->Velocity.norm() > 0.01) {
+                        obj->Position += (obj->Velocity * dt);
+                    }
                     checkConstraintsCollision(obj, r_c);
 
                     if (obj->Position.getX() < 0 || obj->Position.getX() > window_constraints[0] ||
                             obj->Position.getY() < 0 || obj->Position.getY() > window_constraints[1]) {
                         n_outside++;
-                        //removeObject(obj);
+                        removeObject(obj);
                     } else {
                         obj->Force = {0.f, 0.f}; // Reinitializing the force applied to the Object
                         obj->applyChange();
