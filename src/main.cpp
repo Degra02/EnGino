@@ -29,7 +29,7 @@ int main() {
     float dt_sub = dt / SUBSTEPS;
 
     // Percentage of velocity kept after each collision
-    float restitution_coef = 0.995;
+    float restitution_coef = 0.99;
 
     // For Verlet calculus
     pheng::VerletSolver solver(&world);
