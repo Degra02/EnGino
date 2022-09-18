@@ -17,7 +17,7 @@ int main() {
     srand(time(nullptr));
 
     sf::Font font;
-    font.loadFromFile("font.TTF");
+    font.loadFromFile("/home/degra/Coding/C++/EnGino/font.TTF");
 
     pheng::World world = pheng::World(font, WIDTH, HEIGHT);
     world.setGravity({0, 981});
